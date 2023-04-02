@@ -9,6 +9,7 @@ body {
 	background-image: url("/src/img/bg.png");
 	background-repeat: no-repeat;
 	background-size: cover;
+	height: 1900px;
 }
 
 .container {
@@ -139,7 +140,7 @@ body {
 	&__news {
 		display: flex;
 		flex-direction: column;
-		height: 1100px;
+		height: 900px;
 		margin-top: 38px;
 		overflow-y: auto;
 		&-item {
