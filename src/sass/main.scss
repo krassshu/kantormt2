@@ -1,12 +1,12 @@
-@use "reset.scss";
-@use "fonts.scss" as *;
-@use "colors.scss" as *;
-@use "fonts.scss";
-@use "nav.scss";
+@use 'reset.scss';
+@use 'fonts.scss' as *;
+@use 'colors.scss' as *;
+@use 'fonts.scss';
+@use 'nav.scss';
 
 body {
 	color: $font-color;
-	background-image: url("/src/img/bg.png");
+	background-image: url('/src/img/bg.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -72,7 +72,7 @@ body {
 				position: relative;
 			}
 			span::before {
-				content: "";
+				content: '';
 				position: absolute;
 				top: 120%;
 				left: 50%;
@@ -213,7 +213,7 @@ body {
 		align-items: center;
 		flex-direction: column;
 		height: 370px;
-		background-image: url("/dist/img/path9478.png");
+		background-image: url('/dist/img/path9478.png');
 		background-repeat: no-repeat;
 		background-size: contain;
 
@@ -222,16 +222,25 @@ body {
 			display: flex;
 			margin-bottom: 45px;
 
-			font-size: 18px;
+			font-size: 16px;
 			&::before {
-				content: "";
+				content: url('/dist/img/kreska1krotka.svg');
 				position: absolute;
-				width: 90px;
-				height: 35px;
-				background-image: url("/dist/img/kreska1dluga.svg");
-				background-repeat: no-repeat;
-				background-size: cover;
-				transform: scale(1.7);
+				bottom: -30px;
+				left: -55px;
+			}
+
+			&:nth-child(1)::before {
+				transform: rotate(3.22deg);
+			}
+			&:nth-child(2)::before {
+				transform: rotate(-3.27deg);
+			}
+			&:nth-child(3)::before {
+				transform: rotate(-175.5deg);
+			}
+			&:nth-child(4)::before {
+				transform: rotate(-2.06deg);
 			}
 		}
 
