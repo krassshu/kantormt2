@@ -22,10 +22,35 @@
 			line-height: 70px;
 
 			.nav__items--item a {
+				position: relative;
 				text-decoration: none;
 				text-transform: uppercase;
 				font-weight: 300;
 				color: #fff;
+			}
+
+			.nav__items--item a,
+			.nav__items--item a::after {
+				transition: 0.3s;
+			}
+
+			.nav__items--item a::after {
+				content: '';
+				position: absolute;
+				width: 120%;
+				height: 2px;
+				background-color: $active-page;
+				bottom: -10px;
+				left: -10%;
+				transform: scaleX(0);
+			}
+
+			.nav__items--item a:hover::after {
+				transform: scaleX(1);
+			}
+
+			.nav__items--item a:hover {
+				color: $active-page;
 			}
 
 			.active-page a {
