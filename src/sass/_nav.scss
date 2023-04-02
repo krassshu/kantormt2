@@ -1,0 +1,47 @@
+@use 'colors.scss' as *;
+
+.nav-container {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	padding-bottom: 100px;
+
+	.nav {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		width: 75vw;
+		height: 70px;
+		background-color: $nav-bgc;
+		border-bottom-left-radius: 100px;
+		border-bottom-right-radius: 100px;
+
+		.nav__items {
+			display: flex;
+			gap: 80px;
+			line-height: 70px;
+
+			.nav__items--item a {
+				text-decoration: none;
+				text-transform: uppercase;
+				font-weight: 300;
+				color: #fff;
+			}
+
+			.active-page a {
+				position: relative;
+				color: $active-page;
+			}
+
+			.active-page a::after {
+				content: '';
+				position: absolute;
+				width: 120%;
+				height: 2px;
+				background-color: $active-page;
+				bottom: -10px;
+				left: -10%;
+			}
+		}
+	}
+}
