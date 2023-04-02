@@ -209,9 +209,39 @@ body {
 	}
 	.active-admin {
 		display: flex;
-		justify-content: center;
+		justify-content: end;
 		align-items: center;
 		flex-direction: column;
-		
+		height: 370px;
+		background-image: url("/dist/img/path9478.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+
+		p {
+			position: relative;
+			display: flex;
+			margin-bottom: 45px;
+
+			font-size: 18px;
+			&::before {
+				content: "";
+				position: absolute;
+				width: 90px;
+				height: 35px;
+				background-image: url("/dist/img/kreska1dluga.svg");
+				background-repeat: no-repeat;
+				background-size: cover;
+				transform: scale(1.7);
+			}
+		}
+
+		&__status {
+			display: block;
+			width: 12px;
+			height: 12px;
+			margin-left: 10px;
+			border-radius: 50%;
+			background-color: $unactive;
+		}
 	}
 }
