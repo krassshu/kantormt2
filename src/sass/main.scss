@@ -1,12 +1,12 @@
-@use 'reset.scss';
-@use 'fonts.scss' as *;
-@use 'colors.scss' as *;
-@use 'fonts.scss';
-@use 'nav.scss';
+@use "reset.scss";
+@use "fonts.scss" as *;
+@use "colors.scss" as *;
+@use "fonts.scss";
+@use "nav.scss";
 
 body {
 	color: $font-color;
-	background-image: url('/src/img/bg.png');
+	background-image: url("/src/img/bg.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -28,7 +28,7 @@ body {
 	width: 278px;
 	height: 279px;
 	margin: 0 16px;
-	background-image: url('/dist/img/box_border.svg');
+	background-image: url("/dist/img/box_border.svg");
 	span {
 		margin: 28px auto 0 auto;
 		font-size: 18px;
@@ -107,7 +107,7 @@ body {
 		justify-content: center;
 		width: 256px;
 		height: 48px;
-		background-image: url('/dist/img/social_border.svg');
+		background-image: url("/dist/img/social_border.svg");
 		span {
 			margin-left: 11px;
 		}
@@ -159,7 +159,6 @@ body {
 		width: 100%;
 		text-align: center;
 		gap: 16px;
-
 		h1 {
 			font-size: 32px;
 			position: relative;
@@ -167,7 +166,7 @@ body {
 
 		h1::before {
 			position: absolute;
-			content: '';
+			content: "";
 			top: 50%;
 			left: 0;
 			width: 218px;
@@ -176,7 +175,7 @@ body {
 		}
 		h1::after {
 			position: absolute;
-			content: '';
+			content: "";
 			top: 50%;
 			right: 0;
 			width: 218px;
@@ -243,7 +242,7 @@ body {
 
 		h2::before {
 			position: absolute;
-			content: '';
+			content: "";
 			top: 50%;
 			left: 110%;
 			width: 305px;
@@ -252,7 +251,7 @@ body {
 		}
 		h2::after {
 			position: absolute;
-			content: '';
+			content: "";
 			top: 50%;
 			right: 110%;
 			width: 305px;
@@ -269,7 +268,8 @@ body {
 			height: 731px;
 			padding: 15px;
 			margin-top: 16px;
-			background-color: rgba(199, 221, 245, 0.05);
+			// background-color: rgba(199, 221, 245, 0.05);
+			background-color: black;
 			border-radius: 16px;
 			&-item {
 				display: flex;
@@ -297,12 +297,22 @@ body {
 						&:nth-child(1) {
 							border-bottom-width: 1px;
 							border-style: solid;
-							border-image: linear-gradient(to right, transparent 0%, $active-page 100%) 1;
+							border-image: linear-gradient(
+									to right,
+									transparent 0%,
+									$active-page 100%
+								)
+								1;
 						}
 						&:nth-child(3) {
 							border-bottom-width: 1px;
 							border-style: solid;
-							border-image: linear-gradient(to right, $active-page 0%, transparent 100%) 1;
+							border-image: linear-gradient(
+									to right,
+									$active-page 0%,
+									transparent 100%
+								)
+								1;
 						}
 					}
 				}
@@ -324,5 +334,5 @@ body {
 	width: 278px;
 	height: 279px;
 	margin: 0 16px;
-	background-image: url('/dist/img/box_border.svg');
+	background-image: url("/dist/img/box_border.svg");
 }
