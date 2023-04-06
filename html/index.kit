@@ -20,18 +20,85 @@
 			<div class="left-sitebar">
 				<div class="exchange">
 					<span>przelicznik</span>
-					<div class="exchange__inputs">
-						<select name="" id="serv-from">
-							<option value="Glevia">Glevia</option>
-						</select>
-						<input type="number" placeholder="Ilość won..." />
-					</div>
-					<div class="exchange__icon"></div>
-					<div class="exchange__inputs">
-						<select name="" id="serv-from">
-							<option value="Glevia">Glevia</option>
-						</select>
-						<input type="number" placeholder="Ilość won..." />
+					<div class="exchange__box">
+						<div class="exchange__box-inputs">
+							<select name="" id="serv-from">
+								<option value="Glevia">Glevia</option>
+							</select>
+							<input type="number" placeholder="Ilość won..." />
+						</div>
+						<div class="exchange__icon">
+							<svg
+								width="32"
+								height="33"
+								viewBox="0 0 32 33"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M24.4853 7.654C29.1715 12.3403 29.1715 19.9383 24.4853 24.6245C19.799 29.3108 12.201 29.3108 7.51472 24.6245C2.82843 19.9382 2.82843 12.3403 7.51472 7.654C12.201 2.96771 19.799 2.96771 24.4853 7.654"
+									stroke="url(#paint0_linear_211_4339)"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path
+									d="M19.2333 15.1047L21.7164 12.6224L19.2333 10.1393M11.4297 12.625H21.7154"
+									stroke="url(#paint1_linear_211_4339)"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path
+									d="M12.7683 17.1739L10.2852 19.6562L12.7683 22.1393M20.5709 19.6536H10.2852"
+									stroke="url(#paint2_linear_211_4339)"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<defs>
+									<linearGradient
+										id="paint0_linear_211_4339"
+										x1="16"
+										y1="4.13928"
+										x2="16"
+										y2="28.1393"
+										gradientUnits="userSpaceOnUse"
+									>
+										<stop stop-color="#F6D4BA" />
+										<stop offset="1" stop-color="#F6D4BA" stop-opacity="0.45" />
+									</linearGradient>
+									<linearGradient
+										id="paint1_linear_211_4339"
+										x1="16.573"
+										y1="10.1393"
+										x2="16.573"
+										y2="15.1047"
+										gradientUnits="userSpaceOnUse"
+									>
+										<stop stop-color="#F6D4BA" />
+										<stop offset="1" stop-color="#F6D4BA" stop-opacity="0.45" />
+									</linearGradient>
+									<linearGradient
+										id="paint2_linear_211_4339"
+										x1="15.428"
+										y1="17.1739"
+										x2="15.428"
+										y2="22.1393"
+										gradientUnits="userSpaceOnUse"
+									>
+										<stop stop-color="#F6D4BA" />
+										<stop offset="1" stop-color="#F6D4BA" stop-opacity="0.45" />
+									</linearGradient>
+								</defs>
+							</svg>
+						</div>
+
+						<div class="exchange__box-inputs">
+							<select name="" id="serv-from">
+								<option value="Glevia">Glevia</option>
+								<option value="Glevia">Glevia</option>
+								<option value="Glevia">Glevia</option>
+							</select>
+							<input type="number" placeholder="Ilość won..." />
+						</div>
 					</div>
 					<p>Przejdź do <a href="#">formularza wymiany</a></p>
 				</div>
@@ -49,6 +116,7 @@
 								fill="white"
 							/>
 						</svg>
+						<span>Nasz discord</span>
 					</div>
 				</div>
 				<div class="adds"></div>
@@ -406,7 +474,7 @@
 					<h2>Aktualności</h2>
 					<div class="news__wrapper">
 						<div class="news__wrapper-item">
-							<p>
+							<p id="news-content">
 								Lorem, ipsum dolor sit amet consectetur adipisicing elit.
 								Pariatur reprehenderit distinctio impedit? Quia, illo nam. A
 								optio animi obcaecati ex, laudantium magnam qui sequi modi
