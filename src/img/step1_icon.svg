@@ -1,7 +1,1 @@
-<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M85.3307 112H42.6641" stroke="#69DBEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="10.6641" y="16" width="106.667" height="74.6667" rx="8" stroke="#69DBEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M117.331 74.6667H10.6641" stroke="#69DBEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M74.6641 90.6667V96.0001C74.6641 104.837 78.2458 112 82.6641 112" stroke="#69DBEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M53.3359 90.6667V96.0001C53.3359 104.837 49.7542 112 45.3359 112" stroke="#69DBEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+<svg width="128" height="128" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity=".2" stroke="#69DBEF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M85.33 112H42.665"/><rect x="10.664" y="16" width="106.667" height="74.667" rx="8"/><path d="M117.331 74.667H10.664m64 16V96c0 8.837 3.582 16 8 16M53.336 90.667V96c0 8.837-3.582 16-8 16"/><path clip-rule="evenodd" d="M84.305 64.615h-9.026V24h9.026v40.615zm-15.797.001h-9.026v-27.79h9.026v27.79zm-15.789 0h-9.026V49.652h9.026v14.964z"/></g></svg>
