@@ -19,13 +19,13 @@
 	<div class="nav-container">
 	<nav class="nav">
 		<ul class="nav__items">
-			<li class="nav__items--item active-page">
+			<li class="nav__items--item">
 				<div class="nav__items--item--squares left">
 					<span class="lg_i"></span>
 					<span class="md_i"></span>
 					<span class="sm_i"></span>
 				</div>
-				<a href="./index.html"> strona główna </a>
+				<a href="./index.html"> Strona główna </a>
 				<div class="nav__items--item--squares right">
 					<span class="sm_i"></span>
 					<span class="md_i"></span>
@@ -38,7 +38,7 @@
 					<span class="md_i"></span>
 					<span class="sm_i"></span>
 				</div>
-				<a href="./wymiana.html" class="t400"> wymiana</a>
+				<a href="./wymiana.html" class="t400"> Wymiana</a>
 				<div class="nav__items--item--squares right">
 					<span class="sm_i"></span>
 					<span class="md_i"></span>
@@ -51,7 +51,7 @@
 					<span class="md_i"></span>
 					<span class="sm_i"></span>
 				</div>
-				<a href="./opinie.html" class="t400"> opinie </a>
+				<a href="./opinie.html" class="t400"> Opinie </a>
 				<div class="nav__items--item--squares right">
 					<span class="sm_i"></span>
 					<span class="md_i"></span>
@@ -64,7 +64,7 @@
 					<span class="md_i"></span>
 					<span class="sm_i"></span>
 				</div>
-				<a href="./support.html"> support </a>
+				<a href="./support.html"> Support </a>
 				<div class="nav__items--item--squares right">
 					<span class="sm_i"></span>
 					<span class="md_i"></span>
@@ -77,7 +77,7 @@
 					<span class="md_i"></span>
 					<span class="sm_i"></span>
 				</div>
-				<a href="./o-nas.html"> o nas </a>
+				<a href="./o-nas.html"> O nas </a>
 				<div class="nav__items--item--squares right">
 					<span class="sm_i"></span>
 					<span class="md_i"></span>
@@ -90,7 +90,7 @@
 					<span class="md_i"></span>
 					<span class="sm_i"></span>
 				</div>
-				<a href="./regulamin.html"> regulamin </a>
+				<a href="./regulamin.html"> Regulamin </a>
 				<div class="nav__items--item--squares right">
 					<span class="sm_i"></span>
 					<span class="md_i"></span>
@@ -99,8 +99,48 @@
 			</li>
 		</ul>
 	</nav>
-</div>	<div class="wrapper">
-		<div class="left-sitebar">
+</div>
+<script>
+	document.addEventListener("DOMContentLoaded", function (event) {
+		const webPage = document.title
+		const navItems = document.querySelectorAll(".nav__items--item")
+
+		navItems.forEach((el) => {
+			const linkText = el.querySelector("a").textContent.trim()
+			if (linkText == webPage) {
+				el.classList.add("active-page")
+			}
+		})
+	})
+</script>
+		<div class="wrapper">
+			<div class="left-sitebar">
+							</div>
+			<main class="main">
+				<h1>Formularz wymiany</h1>
+				<form class="form" id="exchange-form" action="" method="post">
+					<label for="nick">Wprowadź nick z serwera</label>
+					<input type="text" name="" id="nick" placeholder="nick123" />
+					<label for="dsc-nick">Wprowadź nick z Discorda <i>*</i></label>
+					<input type="text" name="" id="dsc-nick" placeholder="nick#1234" />
+					<p>Chcę wymienić wony</p>
+					<div class="exchange">
+						<label for="serv-from">Z serwera:</label>
+						<div class="exchange__tile">
+							<select name="" id="serv-from">
+								<option value="Glevia">Glevia</option>
+								<option value="Alune">Alune</option>
+							</select>
+							<input type="number" placeholder="Ilość won..." />
+						</div>
+						<label for="serv-to">Z serwera:</label>
+						<div class="exchange__tile">
+							<select name="" id="serv-to">
+								<option value="Alune">Alune</option>
+								<option value="Glevia">Glevia</option>
+							</select>
+							<input type="number" placeholder="Otrzymam..." disabled />
+						</div>
 					</div>
 		<main class="main">
 			<h1>Formularz wymiany</h1>

@@ -1,0 +1,18 @@
+@use "reset.scss";
+@use "fonts.scss" as *;
+@use "colors.scss" as *;
+@use "fonts.scss";
+@use "nav.scss";
+
+body {
+	color: $font-color;
+	background-image: url("/src/img/bg.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.wrapper {
+	display: flex;
+	justify-content: center;
+	max-width: 1440px;
+	margin: 0 auto;
+}
