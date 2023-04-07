@@ -1,8 +1,5 @@
-@use "reset.scss";
-@use "fonts.scss" as *;
+@use "subpage.scss";
 @use "colors.scss" as *;
-@use "fonts.scss";
-@use "nav.scss";
 
 body {
 	color: $font-color;
