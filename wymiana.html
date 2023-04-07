@@ -103,7 +103,7 @@
 	document.addEventListener("DOMContentLoaded", function (event) {
 		const webPage = document.title
 		const navItems = document.querySelectorAll(".nav__items--item")
-
+		
 		navItems.forEach((el) => {
 			const linkText = el.querySelector("a").textContent.trim()
 			if (linkText == webPage) {
