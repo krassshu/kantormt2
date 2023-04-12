@@ -113,9 +113,9 @@
 		})
 	})
 </script>
-		<div class="wrapper">
-			<div class="left-sitebar">
-				<div class="social">
+	<div class="wrapper">
+		<div class="left-sitebar">
+			<div class="social">
     <a
         rel="”nofollow”"
         target="_blank"
@@ -137,33 +137,7 @@
             <span>Nasz discord</span>
         </div>
     </a>
-</div>			</div>
-			<main class="main">
-				<h1>Formularz wymiany</h1>
-				<form class="form" id="exchange-form" action="" method="post">
-					<label for="nick">Wprowadź nick z serwera</label>
-					<input type="text" name="" id="nick" placeholder="nick123" />
-					<label for="dsc-nick">Wprowadź nick z Discorda <i>*</i></label>
-					<input type="text" name="" id="dsc-nick" placeholder="nick#1234" />
-					<p>Chcę wymienić wony</p>
-					<div class="exchange">
-						<label for="serv-from">Z serwera:</label>
-						<div class="exchange__tile">
-							<select name="" id="serv-from">
-								<option value="Glevia">Glevia</option>
-								<option value="Alune">Alune</option>
-							</select>
-							<input type="number" placeholder="Ilość won..." />
-						</div>
-						<label for="serv-to">Z serwera:</label>
-						<div class="exchange__tile">
-							<select name="" id="serv-to">
-								<option value="Alune">Alune</option>
-								<option value="Glevia">Glevia</option>
-							</select>
-							<input type="number" placeholder="Otrzymam..." disabled />
-						</div>
-					</div>
+</div>		</div>
 		<main class="main">
 			<h1>Formularz wymiany</h1>
 			<form class="form" id="exchange-form" action="" method="post">
@@ -201,7 +175,44 @@
 			</p>
 		</main>
 		<div class="right-sitebar">
-					</div>
+			<div class="right-sitebar">
+    <div class="login">
+        <span>Logowanie</span>
+        <form class="login__form" action="#" method="post">
+            <div class="login__form-user">
+                <label for="user-name"></label>
+                <input type="text" name="" id="user-name" placeholder="Nazwa użytkownika" />
+            </div>
+            <div class="login__form-passwd">
+                <label for="passwd"></label>
+                <input type="password" name="" id="passwd" placeholder="Wprowadź hasło" />
+            </div>
+            <button type="submit">Zaloguj się</button>
+        </form>
+        <p>Nie posiadasz jeszcze konta? <a href="#">Dołącz teraz!</a></p>
+        <a href="#">Przypomnij hasło</a>
+    </div>
+    <div class="admins">
+        <span>Administracja</span>
+        <div class="admins__items">
+            <div class="admins__items-item">
+                <p>Aplik</p><i class="online"></i>
+            </div>
+            <div class="admins__items-separator"></div>
+            <div class="admins__items-item">
+                <p>vlncY</p><i class="offline"></i>
+            </div>
+            <div class="admins__items-separator"></div>
+            <div class="admins__items-item">
+                <p>Krewka</p><i class="online"></i>
+            </div>
+            <div class="admins__items-separator"></div>
+            <div class="admins__items-item">
+                <p>krashu</p><i class="offline"></i>
+            </div>
+        </div>
+    </div>
+</div>		</div>
 	</div>
 </body>
 
