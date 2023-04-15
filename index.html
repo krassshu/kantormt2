@@ -16,7 +16,8 @@
 </head>
 
 <body>
-	<div class="nav-container">
+	<div class="wrapper">
+		<div class="nav-container">
 	<nav class="nav">
 		<ul class="nav__items">
 			<li class="nav__items--item">
@@ -113,7 +114,6 @@
 		})
 	})
 </script>
-	<div class="wrapper">
 		<div class="left-sitebar">
 			<div class="exchange">
 				<span>przelicznik</span>
@@ -122,7 +122,7 @@
 						<select name="" id="serv-from">
 							<option value="Glevia">Glevia</option>
 						</select>
-						<input type="number" placeholder="Ilość won..." />
+						<input id="won-in" type="number" placeholder="Ilość won..." />
 					</div>
 					<div class="exchange__icon">
 						<svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -159,7 +159,7 @@
 							<option value="Glevia">Glevia</option>
 							<option value="Glevia">Glevia</option>
 						</select>
-						<input type="number" placeholder="Otrzymam..." />
+						<input id="won-out" type="number" placeholder="Otrzymam..." />
 					</div>
 				</div>
 				<p>Przejdź do <a href="#">formularza wymiany</a></p>
@@ -591,7 +591,8 @@
 				</div>
 			</div>
 		</main>
-		<div class="login">
+		<div class="right-sitebar">
+			<div class="login">
 	<span>Logowanie</span>
 	<form class="login__form" action="#" method="post">
 		<div class="login__form-user">
@@ -636,6 +637,8 @@
 		</div>
 	</div>
 </div>
+		</div>
 	</div>
 </body>
+
 </html>
