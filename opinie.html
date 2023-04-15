@@ -143,16 +143,27 @@
 					<form action="" class="opinions__form">
 						<div class="opinions__form-inputs">
 							<label for="op-nick">Wprowadź nick</label>
-							<input type="text" name="" id="op-nick" placeholder="nick123" />
-						</div>
-						<div class="opinions__form-inputs">
-							<label for="op-content">Napisz swoją opinię</label>
 							<input
 								type="text"
 								name=""
-								id="op-content"
-								placeholder="Opinia..."
+								id="op-nick"
+								placeholder="nick123"
+								required
 							/>
+						</div>
+						<div class="opinions__form-inputs">
+							<label for="op-content">Napisz swoją opinię</label>
+							<textarea
+								type="text"
+								name=""
+								id="op-content"
+								minlength="4"
+								maxlength="150"
+								cols="30"
+								rows="6"
+								placeholder="Opinia... (max 150 słów)"
+								required
+							></textarea>
 						</div>
 						<button type="submit">Prześlij opinię</button>
 					</form>
