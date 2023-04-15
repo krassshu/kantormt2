@@ -1,4 +1,5 @@
 @use "subpage.scss";
+@use "site-bars.scss";
 @use "colors.scss" as *;
 
 body {
@@ -10,7 +11,7 @@ body {
 .wrapper {
 	display: flex;
 	justify-content: center;
-	max-width: 1440px;
+	min-width: 1440px;
 	margin: 0 auto;
 }
 .main {
