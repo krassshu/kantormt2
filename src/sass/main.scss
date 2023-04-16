@@ -1,10 +1,28 @@
 @use 'main-styles.scss';
 @use 'colors.scss' as *;
 
+html {
+	min-width: 1440px;
+}
+
 body {
 	color: $font-color;
 	background-color: #0a0e13;
+	display: flex;
+	justify-content: center;
 }
+
+.background {
+	background-image: url('/src/img/new_bgv2.png');
+	background-position: top, 50%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 1488px;
+	min-height: 1488px;
+	max-height: 1488px;
+	width: 2014px;
+}
+
 .wrapper {
 	display: flex;
 	flex-wrap: wrap;
@@ -14,9 +32,6 @@ body {
 	height: 1488px;
 	width: 1440px;
 	max-width: 1440px;
-	background-image: url('/src/img/new_bg.png');
-	background-size: cover;
-	background-repeat: no-repeat;
 }
 .left-sitebar {
 	display: flex;
