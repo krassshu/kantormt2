@@ -86,19 +86,6 @@
 					<span class="lg_i"></span>
 				</div>
 			</li>
-			<li class="nav__items--item">
-				<div class="nav__items--item--squares left">
-					<span class="lg_i"></span>
-					<span class="md_i"></span>
-					<span class="sm_i"></span>
-				</div>
-				<a href="./regulamin.html"> Regulamin </a>
-				<div class="nav__items--item--squares right">
-					<span class="sm_i"></span>
-					<span class="md_i"></span>
-					<span class="lg_i"></span>
-				</div>
-			</li>
 		</ul>
 	</nav>
 </div>
@@ -106,7 +93,7 @@
 	document.addEventListener("DOMContentLoaded", function (event) {
 		const webPage = document.title
 		const navItems = document.querySelectorAll(".nav__items--item")
-		
+
 		navItems.forEach((el) => {
 			const linkText = el.querySelector("a").textContent.trim()
 			if (linkText == webPage) {
