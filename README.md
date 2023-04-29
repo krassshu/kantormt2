@@ -14,3 +14,23 @@
   - server
     - app.js
   - package.json
+
+albo 
+
+- index.html
+- login.html
+- signup.html
+- about.html
+- assets/
+  - css/
+    - main.css
+  - js/
+    - app.js
+  - img/
+    - logo.png
+  - login/
+    - login.css
+    - login.js
+  - signup/
+    - signup.css
+    - signup.js
