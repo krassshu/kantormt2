@@ -1,8 +1,10 @@
+require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer")
+const { check, validationResult } = require("express-validator")
 
 const app = express()
 
@@ -10,7 +12,7 @@ app.use(express.json())
 
 // Connect to MongoDB
 mongoose
-	.connect("mongodb://localhost:27017/kantor", {
+	.connect(process.env.MONGODB_URI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})
@@ -19,8 +21,8 @@ mongoose
 
 // Define user, exchange, and opinion schemas
 const userSchema = new mongoose.Schema({
-	username: { type: String, required: true },
-	email: { type: String, required: true },
+	username: { type: String, required: true, unique: true },
+	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
 })
 
@@ -49,7 +51,7 @@ function auth(req, res, next) {
 	if (!token) return res.status(401).send("Access denied. No token provided.")
 
 	try {
-		const decoded = jwt.verify(token, "jwtPrivateKey")
+		const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
 		req.user = decoded
 		next()
 	} catch (ex) {
@@ -57,103 +59,188 @@ function auth(req, res, next) {
 	}
 }
 
-// Login route
-app.post("/login", async (req, res) => {
-	const { username, password } = req.body
-	const user = await User.findOne({ username })
-	if (!user) return res.status(400).send("Invalid username or password.")
-
-	const validPassword = await bcrypt.compare(password, user.password)
-	if (!validPassword)
-		return res.status(400).send("Invalid username or password.")
-
-	const token = jwt.sign(
-		{ _id: user._id, username: user.username, email: user.email },
-		"jwtPrivateKey"
-	)
-	res.send(token)
+// Error handling middleware
+app.use((err, req, res, next) => {
+	console.error(err.stack)
+	res.status(500).send("Something went wrong.")
 })
+
+// Login route
+app.post(
+	"/login",
+	[
+		check("username").notEmpty().withMessage("Username is required."),
+		check("password").notEmpty().withMessage("Password is required."),
+	],
+	async (req, res) => {
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() })
+		}
+
+		const { username, password } = req.body
+		const user = await User.findOne({ username })
+		if (!user) return res.status(400).send("Invalid username or password.")
+
+		const validPassword = await bcrypt.compare(password, user.password)
+		if (!validPassword)
+			return res.status(400).send("Invalid username or password.")
+
+		const token = jwt.sign(
+			{ _id: user._id, username: user.username, email: user.email },
+			process.env.JWT_PRIVATE_KEY
+		)
+		res.send(token)
+	}
+)
 
 // Registration route
-app.post("/register", async (req, res) => {
-	const { username, email, password, passwordConfirmation } = req.body
+app.post(
+	"/register",
+	[
+		check("username").notEmpty().withMessage("Username is required."),
+		check("email").isEmail().withMessage("Email is required."),
+		check("password")
+			.isLength({ min: 8 })
+			.withMessage("Password must be at least 8 characters long."),
+		check("passwordConfirmation")
+			.notEmpty()
+			.withMessage("Password confirmation is required."),
+	],
+	async (req, res) => {
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() })
+		}
 
-	if (password !== passwordConfirmation)
-		return res.status(400).send("Passwords do not match.")
+		const { username, email, password, passwordConfirmation } = req.body
 
-	let user = await User.findOne({ email })
-	if (user) return res.status(400).send("User already registered.")
+		if (password !== passwordConfirmation)
+			return res.status(400).send("Passwords do not match.")
 
-	const salt = await bcrypt.genSalt(10)
-	const hashedPassword = await bcrypt.hash(password, salt)
+		let user = await User.findOne({ email })
+		if (user) return res.status(400).send("User already registered.")
 
-	user = new User({ username, email, password: hashedPassword })
-	await user.save()
+		const salt = await bcrypt.genSalt(10)
+		const hashedPassword = await bcrypt.hash(password, salt)
 
-	const token = jwt.sign(
-		{ _id: user._id, username: user.username, email: user.email },
-		"jwtPrivateKey"
-	)
-	res
-		.header("x-auth-token", token)
-		.send({ _id: user._id, username: user.username, email: user.email })
-})
+		user = new User({ username, email, password: hashedPassword })
+		await user.save()
+
+		const token = jwt.sign(
+			{ _id: user._id, username: user.username, email: user.email },
+			process.env.JWT_PRIVATE_KEY
+		)
+		res
+			.header("x-auth-token", token)
+			.send({ _id: user._id, username: user.username, email: user.email })
+	}
+)
+
 // Exchange route
-app.post("/exchange", auth, async (req, res) => {
-	const { serverFrom, serverTo, amountFrom, amountTo, discordNick } = req.body
-	const username = req.user.username
+app.post(
+	"/exchange",
+	auth,
+	[
+		check("serverFrom").notEmpty().withMessage("Server from is required."),
+		check("serverTo").notEmpty().withMessage("Server to is required."),
+		check("amountFrom")
+			.isNumeric()
+			.withMessage("Amount from must be a number.")
+			.custom((value) => value <= 100)
+			.withMessage("Cannot exchange more than 100 units at once."),
+		check("amountTo").isNumeric().withMessage("Amount to must be a number."),
+		check("discordNick")
+			.notEmpty()
+			.withMessage("Discord nickname is required."),
+	],
+	async (req, res) => {
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() })
+		}
 
-	if (amountFrom > 100)
-		return res.status(400).send("Cannot exchange more than 100 units at once.")
+		const { serverFrom, serverTo, amountFrom, amountTo, discordNick } = req.body
+		const username = req.user.username
 
-	const exchange = new Exchange({
-		serverFrom,
-		serverTo,
-		amountFrom,
-		amountTo,
-		username,
-		discordNick,
-	})
-	await exchange.save()
+		const exchange = new Exchange({
+			serverFrom,
+			serverTo,
+			amountFrom,
+			amountTo,
+			username,
+			discordNick,
+		})
+		await exchange.save()
 
-	res.send(exchange)
-})
+		res.send(exchange)
+	}
+)
 
 // Opinion route
-app.post("/opinion", auth, async (req, res) => {
-	const { text } = req.body
-	const username = req.user.username
+app.post(
+	"/opinion",
+	auth,
+	[check("text").notEmpty().withMessage("Opinion text is required.")],
+	async (req, res) => {
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() })
+		}
 
-	const opinion = new Opinion({ username, text })
-	await opinion.save()
+		const { text } = req.body
+		const username = req.user.username
 
-	res.send(opinion)
-})
+		const opinion = new Opinion({ username, text })
+		await opinion.save()
+
+		res.send(opinion)
+	}
+)
 
 // Support route
-app.post("/support", async (req, res) => {
-	const { email, subject, message } = req.body
+app.post(
+	"/support",
+	[
+		check("email").isEmail().withMessage("Email is required."),
+		check("subject").notEmpty().withMessage("Subject is required."),
+		check("message").notEmpty().withMessage("Message is required."),
+	],
+	async (req, res) => {
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() })
+		}
 
-	const transporter = nodemailer.createTransport({
-		host: "smtp.example.com",
-		port: 587,
-		secure: false,
-		auth: {
-			user: "support@example.com",
-			pass: "password",
-		},
-	})
+		const { email, subject, message } = req.body
 
-	const mailOptions = {
-		from: "support@example.com",
-		to: "support@example.com",
-		subject: subject,
-		text: `Email: ${email}\n\n${message}`,
+		const transporter = nodemailer.createTransport({
+			host: "smtp.example.com",
+			port: 587,
+			secure: false,
+			auth: {
+				user: process.env.EMAIL_USER,
+				pass: process.env.EMAIL_PASS,
+			},
+		})
+
+		const mailOptions = {
+			from: process.env.EMAIL_USER,
+			to: process.env.EMAIL_USER,
+			subject: subject,
+			text: `Email: ${email}\n\n${message}`,
+		}
+
+		try {
+			await transporter.sendMail(mailOptions)
+			res.send("Message sent successfully.")
+		} catch (err) {
+			console.error("Failed to send email", err)
+			res.status(500).send("Failed to send email.")
+		}
 	}
-	await transporter.sendMail(mailOptions)
-
-	res.send("Message sent successfully.")
-})
+)
 
 // Start the server
-app.listen(3000, () => console.log("Listening on port 3000..."))
+const port = process.env.PORT || 3000
+app.listen(port, () => console.log(`Listening on port ${port}...`))
