@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin panel</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./assets/css/admin.min.css" />
+		<script defer src="./assets/js/admin.min.js"></script>
+	</head>
+	<body>
+		<div class="nav">
+			<ul class="items">
+				<li class="item"><a href="#">Główna</a></li>
+				<li class="item"><a href="#">Tickety</a></li>
+				<li class="item"><a href="#">Użytkownicy</a></li>
+			</ul>
+			<span
+				>Zalogowany jako:
+				<p id="amdin-nick">Aplik</p></span
+			>
+		</div>
+		<div class="main">
+			<div class="nav-burger"><div class="nav-burger__item"></div></div>
+			<div class="section">
+				<div class="rate">
+					<h2>Kursy serwerowe</h2>
+					<div class="rate__con">
+						<label for="glevia">Glevia:</label>
+						<input type="number" id="glevia" />
+						<input type="number" name="" id="current-glevia" disabled />
+					</div>
+					<div class="rate__con">
+						<label for="alune">Alune:</label>
+						<input type="number" id="alune" />
+						<input type="number" name="" id="current-alune" disabled />
+					</div>
+					<div class="rate__con">
+						<label for="pangea">Pangea:</label>
+						<input type="number" id="pangea" />
+						<input type="number" name="" id="current-pangea" disabled />
+					</div>
+					<div class="rate__con">
+						<label for="samia">Samia:</label>
+						<input type="number" id="samia" />
+						<input type="number" name="" id="current-samia" disabled />
+					</div>
+					<div class="rate__con">
+						<label for="valium">Valium:</label>
+						<input type="number" id="valium" />
+						<input type="number" name="" id="current-valium" disabled />
+					</div>
+					<div class="rate__con">
+						<label for="ervelia">Ervelia:</label>
+						<input type="number" id="ervelia" />
+						<input type="number" name="" id="current-ervelia" disabled />
+					</div>
+					<button class="buttons" id="uprade-rates">Zaktualizuj kursy</button>
+				</div>
+				<div class="post">
+					<h2>Posty na główną</h2>
+					<textarea class="post__area" id="new-post" rows="10"></textarea>
+					<button class="buttons" id="send-post">Wyślij post</button>
+				</div>
+
+				<div class="new-tickets">
+					<p>Ilość nowych ticketów: <span class="tickets">2</span></p>
+					<h2>Najnowszy ticket</h2>
+					<div class="new-tickets__latest">
+						<p>Nick z serwera: <span id="server-nick">Chuj123</span></p>
+						<p>Nick z Discorda: <span id="discord-nick">Chuj1234</span></p>
+						<div class="new-tickets__latest--servers">
+							<p>
+								Z serwera: <span id="from-server">Glewia</span> chce wymienić:
+								<span id="quantity">2137</span> won na serwer:
+								<span id="to-server">Alune</span>
+							</p>
+						</div>
+					</div>
+					<button><a href="/tickets.html">Sprawdź wszystkie tickety</a></button>
+				</div>
+			</div>
+			<div class="section">
+				<div class="guard">
+					<input
+						type="button"
+						value="Rozpocznij pracę"
+						id="working"
+						class="no-active"
+					/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
