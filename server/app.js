@@ -1,15 +1,59 @@
 require("dotenv").config()
-const path = require("path")
 const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer")
 const { check, validationResult } = require("express-validator")
+const path = require("path")
+const mime = require("mime-types")
+const fs = require("fs")
 
 const app = express()
 
+app.use(express.static(path.join(__dirname, "..", "public")))
 app.use(express.json())
+
+//Settings pages
+
+app.use((req, res, next) => {
+	if (req.path.indexOf(".") === -1) {
+		const filePath = path.join(__dirname, "..", "public", req.path + ".html")
+		if (fs.existsSync(filePath)) {
+			req.url += ".html"
+		}
+	}
+	next()
+})
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "..", "public", "index.html"), {
+		headers: {
+			"Content-Type": "text/html",
+		},
+	})
+})
+
+// Middleware to remove file extensions from URLs
+app.use((req, res, next) => {
+	// Check if the requested URL contains a file extension
+	const ext = path.extname(req.url)
+	if (ext !== "" && ext !== ".html") {
+		// If it does, remove the extension
+		req.url = req.url.slice(0, -ext.length)
+	}
+	// Pass the request to the next middleware
+	next()
+})
+
+// admin dashboard route
+app.get("/admin_dashboard", auth, (req, res) => {
+	res.sendFile(path.join(__dirname, "..", "admin-panel.html"), {
+		headers: {
+			"Content-Type": "text/html",
+		},
+	})
+})
 
 // Connect to MongoDB
 mongoose
@@ -284,23 +328,6 @@ app.post(
 		}
 	}
 )
-
-app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "public", "index.html"), {
-		headers: {
-			"Content-Type": "text/html",
-		},
-	})
-})
-
-// admin dashboard route
-app.get("/admin_dashboard", auth, (req, res) => {
-	res.sendFile(path.join(__dirname, "admin-panel.html"), {
-		headers: {
-			"Content-Type": "text/html",
-		},
-	})
-})
 
 // Start the server
 const port = process.env.PORT || 3000
