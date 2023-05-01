@@ -40,10 +40,16 @@ const opinionSchema = new mongoose.Schema({
 	text: { type: String, required: true },
 })
 
+const adminSchema = new mongoose.Schema({
+	username: { type: String, required: true },
+	password: { type: String, required: true },
+})
+
 // Create models from the schemas
 const User = mongoose.model("User", userSchema)
 const Exchange = mongoose.model("Exchange", exchangeSchema)
 const Opinion = mongoose.model("Opinion", opinionSchema)
+const Admin = mongoose.model("Admin", adminSchema)
 
 // Middleware for authentication
 function auth(req, res, next) {
@@ -53,7 +59,11 @@ function auth(req, res, next) {
 	try {
 		const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
 		req.user = decoded
-		next()
+		if (req.user.admin) {
+			next()
+		} else {
+			res.status(403).send("Access denide. You are not an admin")
+		}
 	} catch (ex) {
 		res.status(400).send("Invalid token.")
 	}
@@ -88,6 +98,39 @@ app.post(
 
 		const token = jwt.sign(
 			{ _id: user._id, username: user.username, email: user.email },
+			process.env.JWT_PRIVATE_KEY
+		)
+		res.send(token)
+	}
+)
+
+// Login admin route
+app.post(
+	"/loginadmin",
+	[
+		check("username").notEmpty().withMessage("Username is required."),
+		check("password").notEmpty().withMessage("Password is required."),
+	],
+	async (req, res) => {
+		const errors = validationResult(req)
+		if (!errors.isEmpty()) {
+			return res.status(400).json({ errors: errors.array() })
+		}
+		const { username, password } = req.body
+		const admin = await Admin.findOne({ username })
+		if (!admin) return res.status(400).send("Invalid username or password.")
+
+		const validPassword = await bcrypt.compare(password, admin.password)
+		if (!validPassword)
+			return res.status(400).send("Invalid username or password.")
+
+		const token = jwt.sign(
+			{
+				_id: admin._id,
+				username: admin.username,
+				email: admin.email,
+				admin: true,
+			},
 			process.env.JWT_PRIVATE_KEY
 		)
 		res.send(token)
@@ -240,6 +283,11 @@ app.post(
 		}
 	}
 )
+
+// admin dashboard route
+app.get("/admin_dashboard", auth, (req, res) => {
+	res.redirect("/admin-panel.html")
+})
 
 // Start the server
 const port = process.env.PORT || 3000
