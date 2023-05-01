@@ -1,4 +1,5 @@
 require("dotenv").config()
+const path = require("path")
 const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
@@ -286,7 +287,7 @@ app.post(
 
 // admin dashboard route
 app.get("/admin_dashboard", auth, (req, res) => {
-	res.redirect("/admin-panel.html")
+	res.sendFile(path.join(__dirname, "admin-panel.html"))
 })
 
 // Start the server
