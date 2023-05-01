@@ -116,6 +116,7 @@ h2 {
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
+		width: 400px;
 		max-height: 280px;
 		padding: 8px;
 		background-color: $items;
@@ -126,6 +127,9 @@ h2 {
 			justify-content: space-between;
 			align-items: center;
 			gap: 12px;
+			label {
+				width: 60px;
+			}
 			input {
 				width: 220px;
 				padding: 4px;
@@ -135,6 +139,9 @@ h2 {
 			}
 			input:focus-visible {
 				outline: none;
+			}
+			input:last-child {
+				width: 40px;
 			}
 		}
 	}
