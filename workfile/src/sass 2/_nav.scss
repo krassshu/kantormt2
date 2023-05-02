@@ -1,0 +1,140 @@
+@use 'colors.scss' as *;
+
+.nav-container {
+	display: flex;
+	height: 70px;
+	justify-content: center;
+	align-content: center;
+
+	.nav {
+		display: flex;
+		position: relative;
+		justify-content: center;
+		align-content: center;
+		width: 1140px;
+		height: 70px;
+		background-color: $nav-bgc;
+		border-bottom-left-radius: 100px;
+		border-bottom-right-radius: 100px;
+		border-bottom-width: 1px;
+		border-style: solid;
+		border-image: linear-gradient(
+				to right,
+				transparent 0%,
+				transparent 5%,
+				$main-color 47%,
+				transparent 48%,
+				transparent 52%,
+				$main-color 53%,
+				transparent 95%,
+				transparent 100%
+			)
+			1;
+
+		.nav__items {
+			display: flex;
+			justify-content: center;
+			width: 996px;
+			line-height: 70px;
+			gap: 50px;
+
+			.nav__items--item {
+				display: flex;
+				align-items: center;
+
+				.nav__items--item--squares {
+					display: flex;
+					position: relative;
+					width: 10px;
+					height: 10px;
+					line-height: 0;
+					text-align: center;
+					justify-content: center;
+					align-items: center;
+
+					.sm_i {
+						width: 3px;
+						height: 3px;
+					}
+					.md_i {
+						width: 5px;
+						height: 5px;
+					}
+					.lg_i {
+						width: 7px;
+						height: 7px;
+					}
+
+					.sm_i,
+					.md_i,
+					.lg_i {
+						position: absolute;
+						border: 0.25px solid $active-page;
+						transform: rotate(45deg);
+						transition: 0.3s;
+					}
+				}
+
+				.left {
+					left: -6.5px;
+				}
+				.right {
+					right: -6.5px;
+				}
+
+				a {
+					position: relative;
+					text-decoration: none;
+					text-transform: uppercase;
+					font-weight: 300;
+					font-size: 20px;
+					color: #fff;
+					transition: 0.3s;
+				}
+			}
+			.nav__items--item:hover a {
+				color: $active-page;
+			}
+
+			.nav__items--item:hover .left .md_i {
+				transform: translateX(-10px) rotate(45deg);
+			}
+			.nav__items--item:hover .left .sm_i {
+				transform: translateX(-17px) rotate(45deg);
+			}
+			.nav__items--item:hover .right .md_i {
+				transform: translateX(10px) rotate(45deg);
+			}
+			.nav__items--item:hover .right .sm_i {
+				transform: translateX(17px) rotate(45deg);
+			}
+
+			.active-page {
+				a {
+					color: $active-page;
+				}
+
+				.left .md_i {
+					transform: translateX(-10px) rotate(45deg);
+				}
+				.left .sm_i {
+					transform: translateX(-17px) rotate(45deg);
+				}
+				.right .md_i {
+					transform: translateX(10px) rotate(45deg);
+				}
+				.right .sm_i {
+					transform: translateX(17px) rotate(45deg);
+				}
+			}
+		}
+	}
+
+	.nav::before {
+		position: absolute;
+		content: url(../img/nav_border_vfx.svg);
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, 50%);
+	}
+}
