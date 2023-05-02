@@ -14,230 +14,159 @@ body {
 		text-transform: none;
 	}
 }
-h2 {
-	font-size: 26px;
-	text-align: center;
-	margin-bottom: 8px;
+input,
+textarea {
+	color: $font-color;
 }
-.buttons {
-	font-size: 18px;
+h2 {
+	padding: 8px;
+	font-size: 21px;
+	border-bottom: 1px solid $font-color;
 }
 .nav {
-	position: fixed;
-	left: -100%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: space-between;
-	width: 100%;
-	height: 100%;
-	padding: 8px 0;
+	align-items: center;
+	height: 100vh;
+	width: 200px;
 	font-size: 18px;
-	background-color: $bgc;
-	border-right: 1px solid $border;
-	z-index: 999;
-	span {
+	border-right: 1px solid $input;
+	&__con {
+		margin-top: 18px;
 		width: 100%;
-		margin-bottom: 15px;
-		text-align: center;
-		font-size: 12px;
-		p {
-			text-decoration: underline;
-			font-style: italic;
+		&-info {
+			padding-bottom: 8px;
+			text-align: center;
+			font-size: 26px;
+			border-bottom: 1px solid $input;
+		}
+		&-items {
+			margin-top: 4px;
+			&--item {
+				margin-top: 8px;
+				padding: 8px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+
+				&:hover {
+					background-color: $input;
+				}
+			}
 		}
 	}
-	.items {
-		.item {
-			a {
-				display: block;
-				padding: 8px 12px;
-				margin-bottom: 4px;
-				color: $font-color;
-				cursor: pointer;
-			}
-			&:hover {
-				background-color: $border;
-			}
-		}
+	&__nick {
+		margin-bottom: 8px;
+		text-transform: capitalize;
 	}
 }
 .main {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 32px;
 	width: 100%;
-	padding: 64px 0 32px 0;
-	.nav-burger {
-		display: block;
-		position: fixed;
-		top: 0;
-		height: 42px;
+	padding: 21px;
+	.post {
 		width: 100%;
-		background-color: $bgc;
-		border-bottom: 1px solid $border;
-		&__item {
-			display: block;
-			background-color: #fff;
-			position: absolute;
-			top: 30px;
-			right: 0;
-			height: 4px;
-			width: 30px;
-			border-radius: 2px;
-			&::before,
-			&::after {
-				display: block;
-				background-color: #fff;
-				position: absolute;
-				height: 4px;
-				width: 30px;
-				left: 0;
-				border-radius: 2px;
+		background-color: $items;
+
+		&__form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 8px;
+
+			&-content {
+				width: 100%;
+				height: 200px;
+				background-color: $input;
+				border: 1px solid $border;
+				resize: none;
 			}
-			&::before {
-				bottom: 35px;
-			}
-			&::after {
-				top: 35px;
+			&-btn {
+				width: 100px;
+				margin: 8px 0;
+				padding: 8px;
+				background-color: $font-color;
+				border: none;
+				border-radius: 8px;
+				transition: background-color 0.3s;
+				&:hover {
+					background-color: #9f9f9f;
+				}
 			}
 		}
 	}
 	.section {
 		display: flex;
-		align-items: center;
-		justify-content: space-evenly;
-		flex-wrap: wrap;
-		gap: 64px;
+		justify-content: space-between;
 		width: 100%;
-	}
-	.rate {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		width: 400px;
-		max-height: 280px;
-		padding: 8px;
-		background-color: $items;
-		border: 1px solid $border;
-		border-radius: 8px;
-		&__con {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			gap: 12px;
-			label {
-				width: 60px;
-			}
-			input {
-				width: 220px;
-				padding: 4px;
-				background-color: $input;
-				border: none;
-				color: $font-color;
-			}
-			input:focus-visible {
-				outline: none;
-			}
-			input:last-child {
-				width: 40px;
-			}
-		}
-	}
-	.post {
-		display: flex;
-		flex-direction: column;
-		max-height: 280px;
-		padding: 8px;
-		background-color: $items;
-		border: 1px solid $border;
-		border-radius: 8px;
-		&__area {
-			width: 350px;
-			height: 200px;
-			margin-bottom: 12px;
-			padding: 8px;
-			background-color: $input;
-			border-radius: 8px;
-			color: $font-color;
-			resize: none;
-		}
-		textarea:focus-visible {
-			outline: none;
-		}
-		.buttons {
-			width: 160px;
-		}
-	}
-	.new-tickets {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-		max-height: 280px;
-		padding: 8px;
-		background-color: $items;
-		border: 1px solid $border;
-		border-radius: 8px;
-		.tickets {
-			font-size: 18px;
-			font-weight: 700;
-			color: #ff0000;
-		}
-		&__latest {
-			display: flex;
-			flex-direction: column;
-			gap: 8px;
-			padding: 8px;
-			border: 1px solid $border;
-			p {
-				padding-bottom: 4px;
-				border-bottom: 1px solid $border;
-				span {
-					font-weight: 700;
-					color: #868686;
+		margin-top: 21px;
+
+		.exchange {
+			width: 45%;
+			background-color: $items;
+			&__form {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 8px;
+				text-transform: capitalize;
+				label {
+					display: inline-block;
+					width: 60px;
+				}
+				input {
+					padding: 4px;
+					margin-bottom: 8px;
+					background-color: $input;
+					border: none;
+				}
+
+				&-btn {
+					width: 100px;
+					margin: 8px 0;
+					padding: 8px;
+					background-color: $font-color;
+					border: none;
+					border-radius: 8px;
+					transition: background-color 0.3s;
+					&:hover {
+						background-color: #9f9f9f;
+					}
 				}
 			}
 		}
-	}
+		.tickets {
+			width: 50%;
+			background-color: $items;
+			h3 {
+				padding: 8px;
+				font-size: 21px;
+			}
+			&__queue {
+				display: block;
+				padding: 8px;
+				font-size: 21px;
+				border-bottom: 1px solid $font-color;
+				a {
+					color: #db0000;
+				}
+			}
+			&__ticket {
+				font-size: 18px;
+				padding: 8px;
 
-	.guard {
-		input {
-			width: 300px;
-			height: 100px;
-			font-size: 18px;
-			border: none;
-			border-radius: 8px;
-			cursor: pointer;
+				&-con {
+					padding: 8px;
+					border: 2px solid $border;
+					&--item {
+						margin-bottom: 8px;
+						border-bottom: 2px solid $border;
+					}
+					.date {
+						text-align: right;
+						color: #db0000;
+					}
+				}
+			}
 		}
-	}
-}
-.active {
-	background-color: #008d00;
-}
-.no-active {
-	background-color: #a90000;
-}
-@media (min-width: 576px) {
-	.nav {
-		position: relative;
-		left: 0;
-		align-items: start;
-		width: 170px;
-		height: 100svh;
-	}
-	.main .nav-burger {
-		display: none;
-	}
-	.main .post__area {
-		width: 400px;
-	}
-}
-@media (min-width: 768px) {
-	.main {
-		padding: 32px;
-	}
-	.main .post__area {
-		width: 500px;
 	}
 }
