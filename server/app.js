@@ -20,7 +20,12 @@ app.use((req, res, next) => {
 	if (req.path.indexOf(".") === -1) {
 		const filePath = path.join(__dirname, "..", "public", req.path + ".html")
 		if (fs.existsSync(filePath)) {
-			req.url += ".html"
+			res.sendFile(filePath, {
+				headers: {
+					"Content-Type": "text/html",
+				},
+			})
+			return
 		}
 	}
 	next()
@@ -34,15 +39,13 @@ app.get("*", (req, res) => {
 	})
 })
 
-// Middleware to remove file extensions from URLs
+// Removing *.html extensions
+
 app.use((req, res, next) => {
-	// Check if the requested URL contains a file extension
 	const ext = path.extname(req.url)
 	if (ext !== "" && ext !== ".html") {
-		// If it does, remove the extension
 		req.url = req.url.slice(0, -ext.length)
 	}
-	// Pass the request to the next middleware
 	next()
 })
 
