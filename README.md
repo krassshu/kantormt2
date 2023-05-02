@@ -1,36 +1,13 @@
-# Struktura plików 
+# To do
 
-- project
-  - node_modules
-    - (all installed modules)
-  - public
-    - css
-      - (all CSS files)
-    - images
-      - (all image files)
-    - js
-      - (all front-end JavaScript files)
-    - index.html
-  - server
-    - app.js
-  - package.json
+1. Panel logowania
+  - jak ma wygladac zalogowany użytkownik w prawym sidebarze 
+  - czy ma miec jakis prosty panel ( jakies statystyki, resetowanie hasla itp)
+  - strona z rejestracja i logowaniem do ktorej uzytkownik bedzie przenoszony gdy nie bedzie zalogowany a bedzie chcial np dokonac wymiany
+2. Strona o nas
+3. Walidacja requestow 
+  - wyrzucanie err gdy ktos nie wpisze hasla, maila, wprowadzi zle wartosci w jakies pole itp
+4. Panel admina 
+  - co dodac?
+  - co zmienic?
 
-albo 
-
-- index.html
-- login.html
-- signup.html
-- about.html
-- assets/
-  - css/
-    - main.css
-  - js/
-    - app.js
-  - img/
-    - logo.png
-  - login/
-    - login.css
-    - login.js
-  - signup/
-    - signup.css
-    - signup.js
