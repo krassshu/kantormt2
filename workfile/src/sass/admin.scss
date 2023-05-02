@@ -36,10 +36,15 @@ h2 {
 		margin-top: 18px;
 		width: 100%;
 		&-info {
+			font-style: italic;
 			padding-bottom: 8px;
 			text-align: center;
 			font-size: 26px;
 			border-bottom: 1px solid $input;
+			a{
+				text-decoration: none;
+				color: $font-color;
+			}
 		}
 		&-items {
 			margin-top: 4px;
