@@ -41,7 +41,7 @@ h2 {
 			text-align: center;
 			font-size: 26px;
 			border-bottom: 1px solid $input;
-			a{
+			a {
 				text-decoration: none;
 				color: $font-color;
 			}
@@ -60,9 +60,17 @@ h2 {
 			}
 		}
 	}
-	&__nick {
-		margin-bottom: 8px;
-		text-transform: capitalize;
+	button {
+		width: 100px;
+		margin: 8px 0;
+		font-size: 12px;
+		padding: 8px;
+		border: none;
+		border-radius: 8px;
+		transition: background-color 0.3s;
+		&:hover {
+			background-color: #9f9f9f;
+		}
 	}
 }
 .main {
