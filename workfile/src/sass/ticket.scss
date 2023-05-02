@@ -1,0 +1,197 @@
+@use "reset.scss";
+$bgc: #181823;
+$font-color: #eeeeee;
+$border: #36363d;
+$input: #ffffff4d;
+$items: #272733;
+
+body {
+	display: flex;
+	background-color: $bgc;
+	color: $font-color;
+	font-family: "Roboto", sans-serif;
+	span {
+		text-transform: none;
+	}
+	overflow: hidden;
+}
+input,
+textarea {
+	color: $font-color;
+}
+h2 {
+	padding: 8px;
+	font-size: 21px;
+	border-bottom: 1px solid $font-color;
+}
+.nav {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 100vh;
+	width: 200px;
+	font-size: 18px;
+	border-right: 1px solid $input;
+	&__con {
+		margin-top: 18px;
+		width: 100%;
+		&-info {
+			font-style: italic;
+			padding-bottom: 8px;
+			text-align: center;
+			font-size: 26px;
+			border-bottom: 1px solid $input;
+			a {
+				text-decoration: none;
+				color: $font-color;
+			}
+		}
+		&-items {
+			margin-top: 4px;
+			&--item {
+				margin-top: 8px;
+				padding: 8px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+
+				&:hover {
+					background-color: $input;
+				}
+			}
+		}
+	}
+	button {
+		width: 100px;
+		margin: 8px 0;
+		font-size: 12px;
+		padding: 8px;
+		border: none;
+		border-radius: 8px;
+		transition: background-color 0.3s;
+		&:hover {
+			background-color: #9f9f9f;
+		}
+	}
+}
+.main {
+	width: 100%;
+	padding: 21px;
+	.filter {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 18px;
+		padding-bottom: 21px;
+		border-bottom: 1px solid $font-color;
+		&__type {
+			select {
+				background-color: $input;
+				padding: 6px;
+				border: none;
+				border-radius: 8px;
+				color: $font-color;
+			}
+		}
+		&__search {
+			position: relative;
+
+			input {
+				width: 250px;
+				height: 25px;
+				padding: 8px;
+				border-radius: 8px;
+			}
+			&-get {
+				position: absolute;
+				top: 50%;
+				right: 0;
+				transform: translate(0, -50%);
+				width: 41px;
+				height: 41px;
+				background: transparent;
+				border: none;
+			}
+		}
+	}
+	.tickets {
+		margin-top: 21px;
+		.info {
+			display: flex;
+
+			padding-left: 21px;
+			&__id {
+				min-width: 250px;
+				margin-right: 20px;
+			}
+			&__metin {
+				min-width: 120px;
+				margin-right: 20px;
+			}
+			&__discord {
+				min-width: 120px;
+				margin-right: 20px;
+			}
+			&__from {
+				min-width: 90px;
+				margin-right: 20px;
+			}
+			&__amount {
+				min-width: 95px;
+				margin-right: 20px;
+			}
+			&__to {
+				min-width: 90px;
+				margin-right: 20px;
+			}
+		}
+		&__ticket {
+			display: flex;
+			align-items: center;
+			height: 40px;
+			padding-left: 21px;
+			margin-top: 21px;
+			background-color: $items;
+			border-radius: 8px;
+
+			&-id {
+				min-width: 250px;
+				margin-right: 20px;
+			}
+			&-metin {
+				min-width: 120px;
+				margin-right: 20px;
+			}
+			&-discord {
+				min-width: 120px;
+				margin-right: 20px;
+			}
+			&-from {
+				min-width: 90px;
+				margin-right: 20px;
+			}
+			&-amount {
+				min-width: 95px;
+				margin-right: 20px;
+			}
+			&-to {
+				min-width: 90px;
+				margin-right: 20px;
+			}
+			&-date {
+				margin-right: 20px;
+			}
+			&-resolved {
+				width: 100px;
+				padding: 8px;
+				background-color: #00b164;
+				border: none;
+				border-radius: 8px;
+				transition: background-color 0.3s;
+				&:hover {
+					background-color: #007643;
+				}
+			}
+		}
+	}
+}
