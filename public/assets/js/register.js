@@ -1,16 +1,16 @@
 const registrationForm = document.getElementById("register-form")
 const mainContent = document.querySelector(".main")
 
-function showError(input, errorP, message) {
+function showError(input, errorInfo, message) {
 	input.style.border = "1px solid #d70000"
-	errorP.classList.add("error-field")
-	errorP.textContent = message
+	errorInfo.classList.add("error-field")
+	errorInfo.textContent = message
 }
 
 registrationForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
 	const inputs = document.querySelectorAll(".input-field")
-	const errorP = document.querySelectorAll(".info")
+	const errorInfo = document.querySelectorAll(".info")
 
 	const formData = new FormData(registrationForm)
 	const email = formData.get("email")
@@ -30,7 +30,7 @@ registrationForm.addEventListener("submit", async (event) => {
 	) {
 		inputs.forEach((input, index) => {
 			if (input.value.trim() === "") {
-				showError(input, errorP[index], "To pole jest wymagane")
+				showError(input, errorInfo[index], "To pole jest wymagane")
 			}
 		})
 		inputs[5].labels[0].style.color = "#d70000"
@@ -38,8 +38,16 @@ registrationForm.addEventListener("submit", async (event) => {
 	}
 
 	if (password.length < 8) {
-		showError(inputs[3], errorP[3], "Hasło musi posiadać co najmniej 8 znaków")
-		showError(inputs[4], errorP[4], "Hasło musi posiadać co najmniej 8 znaków")
+		showError(
+			inputs[3],
+			errorInfo[3],
+			"Hasło musi posiadać co najmniej 8 znaków"
+		)
+		showError(
+			inputs[4],
+			errorInfo[4],
+			"Hasło musi posiadać co najmniej 8 znaków"
+		)
 		return
 	}
 
@@ -50,20 +58,20 @@ registrationForm.addEventListener("submit", async (event) => {
 	) {
 		showError(
 			inputs[3],
-			errorP[3],
+			errorInfo[3],
 			"Hasło musi składać się z małych i dużych liter oraz cyfr."
 		)
 		showError(
 			inputs[4],
-			errorP[4],
+			errorInfo[4],
 			"Hasło musi składać się z małych i dużych liter oraz cyfr."
 		)
 		return
 	}
 
 	if (password !== passwordConfirmation) {
-		showError(inputs[3], errorP[3], "Hasła nie pasują do siebie")
-		showError(inputs[4], errorP[4], "Hasła nie pasują do siebie")
+		showError(inputs[3], errorInfo[3], "Hasła nie pasują do siebie")
+		showError(inputs[4], errorInfo[4], "Hasła nie pasują do siebie")
 		return
 	}
 
@@ -94,17 +102,21 @@ registrationForm.addEventListener("submit", async (event) => {
 		if (response.status === 400) {
 			const error = await response.text()
 			if (error === "e-mail") {
-				showError(inputs[0], errorP[0], "Wprowadzony e-mail został już użyty")
+				showError(
+					inputs[0],
+					errorInfo[0],
+					"Wprowadzony e-mail został już użyty"
+				)
 			} else if (error === "user") {
 				showError(
 					inputs[1],
-					errorP[1],
+					errorInfo[1],
 					"Wybrana nazwa użytkownika jest już zajęta"
 				)
 			} else if (error === "discord") {
 				showError(
 					inputs[2],
-					errorP[2],
+					errorInfo[2],
 					"Wprowadzony nick z Discord'a został już użyty"
 				)
 			}
