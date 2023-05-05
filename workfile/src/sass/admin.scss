@@ -110,11 +110,13 @@ h2 {
 	.section {
 		display: flex;
 		justify-content: space-between;
+		gap: 21px;
 		width: 100%;
 		margin-top: 21px;
 
-		.exchange {
-			width: 45%;
+		.exchange,
+		.currency {
+			width: 100%;
 			background-color: $items;
 			&__form {
 				display: flex;
@@ -127,10 +129,15 @@ h2 {
 					width: 60px;
 				}
 				input {
+					width: 120px;
 					padding: 4px;
 					margin-bottom: 8px;
 					background-color: $input;
+					color: $font-color;
 					border: none;
+				}
+				input::placeholder {
+					color: $font-color;
 				}
 
 				&-btn {
@@ -148,7 +155,7 @@ h2 {
 			}
 		}
 		.tickets {
-			width: 50%;
+			width: 100%;
 			background-color: $items;
 			h3 {
 				padding: 8px;
