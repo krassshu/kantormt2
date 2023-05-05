@@ -18,10 +18,7 @@ input,
 textarea {
 	color: $font-color;
 }
-a {
-	text-decoration: none;
-	color: $font-color;
-}
+
 h2 {
 	padding: 8px;
 	font-size: 21px;
@@ -54,12 +51,19 @@ h2 {
 			margin-top: 4px;
 			&--item {
 				margin-top: 8px;
-				padding: 8px;
+
 				cursor: pointer;
 				transition: background-color 0.3s;
 
 				&:hover {
 					background-color: $input;
+				}
+				a {
+					display: inline-block;
+					width: 100%;
+					padding: 8px;
+					text-decoration: none;
+					color: $font-color;
 				}
 			}
 		}
