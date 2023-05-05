@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin panel</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./assets/css/ticket.min.css" />
+		<script defer src="./assets/js/ticket.min.js"></script>
+	</head>
+	<body>
+		<nav class="nav">
+			<div class="nav__con">
+				<p class="nav__con-info"><a href="/">Kantor MT2</a></p>
+				<ul class="nav__con-items">
+					<li class="nav__con-items--item">
+						<a href="/admin-panel.html">Home panel</a>
+					</li>
+					<li class="nav__con-items--item">Tickets</li>
+					<li class="nav__con-items--item"><a href="/posts">Posts</a></li>
+				</ul>
+			</div>
+			<button
+				id="work-status"
+				style="background-color: #9f0000; color: #eeeeee"
+			>
+				Start working <span class="nav__nick">Aplik</span>
+			</button>
+		</nav>
+		<main class="main">
+			<h2>Tickets</h2>
+			<div class="filter">
+				<div class="filter__type">
+					<label for="type">Select type: </label>
+					<select name="" id="type">
+						<option value="unresolved">unresolved</option>
+						<option value="resolved">resolved</option>
+					</select>
+				</div>
+				<div class="filter__search">
+					<input type="text" name="" id="search-id" placeholder="Titcket ID" />
+					<button class="filter__search-get">🔍</button>
+				</div>
+			</div>
+			<div class="tickets">
+				<div class="info">
+					<p class="info__id">Ticket ID</p>
+					<p class="info__metin">Metin's nick</p>
+					<p class="info__discord">Discord nick</p>
+					<p class="info__from">From</p>
+					<p class="info__amount">From amount</p>
+					<p class="info__to">To</p>
+					<p class="info__amount">To amount</p>
+					<p class="info__date">Date</p>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+				<div class="tickets__ticket">
+					<p class="tickets__ticket-id">644c0bed96c404bebfbb9a12</p>
+					<p class="tickets__ticket-metin">sadasdas123</p>
+					<p class="tickets__ticket-discord">dsajida#1233</p>
+					<p class="tickets__ticket-from">Glevia</p>
+					<p class="tickets__ticket-amount">2312</p>
+					<p class="tickets__ticket-to">Alune</p>
+					<p class="tickets__ticket-amount">2000</p>
+					<p class="tickets__ticket-date">23:23 30/12/2023</p>
+					<button class="tickets__ticket-resolved">resolved</button>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

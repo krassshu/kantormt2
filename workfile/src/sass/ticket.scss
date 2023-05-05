@@ -19,6 +19,10 @@ input,
 textarea {
 	color: $font-color;
 }
+a {
+	text-decoration: none;
+	color: $font-color;
+}
 h2 {
 	padding: 8px;
 	font-size: 21px;
