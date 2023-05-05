@@ -4,15 +4,15 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Support</title>
+		<title>Rejestracja</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;700&family=Oxygen:wght@300;400;700&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="./assets/css/support.min.css" />
-		<script defer src="./assets/js/support.min.js"></script>
+		<link rel="stylesheet" href="./assets/css/register.min.css" />
+		<script defer src="./assets/js/register.min.js"></script>
 	</head>
 
 	<body>
@@ -127,36 +127,49 @@
     </a>
 </div>				</div>
 				<main class="main">
-					<h1>Stwórz zgłoszenie</h1>
-					<form class="form" id="support-form" action="/support" method="post">
-						<label for="email">Wprowadź adres e-mail</label>
+					<h1>Zarejestruj się!</h1>
+					<form class="form" id="register-form" action="" method="post">
+						<label for="email">Wprowadź adres e-mail <i>*</i></label>
 						<input
 							type="email"
 							name="email"
 							id="email"
 							placeholder="xxxkoxwojxxx@kantor.pl"
 						/>
-						<label for="subject">Temat zgłoszenia <i>*</i></label>
+						<label for="metin-nick">Wybierz nick <i>*</i></label>
 						<input
 							type="text"
-							name="subject"
-							id="subject"
+							name="metin-nick"
+							id="metin-nick"
 							placeholder="Temat"
 						/>
-						<label for="subject-msg">Treść zgłoszenia</label>
-						<textarea
-							name="message"
-							id="subject-msg"
-							cols="30"
-							rows="10"
-							placeholder="Glevia"
-						></textarea>
-						<input type="checkbox" name="privacy" id="privacy" />
-						<label for="privacy"
-							>Wyfrażam zgode na przetwarzanie danych osobowych w celu
-							rozwiązania zgloszenia.</label
+						<label for="discord-nick"
+							>Wpisz swój nick z Discord'a <i>*</i></label
 						>
-						<button type="submit">prześlij zgłoszenie</button>
+						<input
+							type="text"
+							name="discord-nick"
+							id="discord-nick"
+							placeholder="Temat"
+						/>
+						<label for="password">Wpisz hasło <i>*</i></label>
+						<input
+							type="password"
+							name="password"
+							id="password"
+							placeholder=""
+						/>
+						<label for="password-conf">Powtórz hasło <i>*</i></label>
+						<input
+							type="password"
+							name="password-conf"
+							id="password-conf"
+							placeholder=""
+						/>
+
+						<input type="checkbox" name="acceptance" id="acceptance" />
+						<label for="acceptance">Akceptuje warunki regulaminu</label>
+						<button type="submit">Zarejestruj się</button>
 					</form>
 				</main>
 				<div class="right-sitebar">

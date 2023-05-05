@@ -61,15 +61,15 @@ function cleanStuff(cb) {
 	cb()
 }
 
-function startBrowserSync(cb) {
-	browserSync.init({
-		server: {
-			baseDir: "./public/",
-		},
-	})
+// function startBrowserSync(cb) {
+// 	browserSync.init({
+// 		server: {
+// 			baseDir: "./public/",
+// 		},
+// 	})
 
-	cb()
-}
+// 	cb()
+// }
 
 function watchForChanges(cb) {
 	watch("./public/*.html").on("change", reload)
@@ -88,4 +88,5 @@ const mainFunctions = parallel(
 	convertImages
 )
 exports.cleanStuff = cleanStuff
-exports.default = series(mainFunctions, startBrowserSync, watchForChanges)
+exports.default = series(mainFunctions, watchForChanges)
+// startBrowserSync,
