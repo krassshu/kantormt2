@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Resetuj hasło</title>
+		<title>Przypomnij hasło</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -19,23 +19,12 @@
 			<div class="wrapper">
 				<!-- @include 'nav.kit' -->
 				<main class="main">
-					<h1>Zresetuj hasło</h1>
-					<form class="form" id="reset-form" action="" method="post">
-						<label for="password">Wpisz hasło</label>
-						<input
-							type="password"
-							name="password"
-							id="password"
-							placeholder=""
-						/>
-						<label for="password-conf">Powtórz hasło</label>
-						<input
-							type="password"
-							name="password-conf"
-							id="password-conf"
-							placeholder=""
-						/>
-						<button type="submit">Zapisz hasło</button>
+					<h1>Przypomnij hasło</h1>
+					<form class="form" id="remind-form" action="" method="post">
+						<label for="remind">Wpisz e-mail lub hasło</label>
+						<input type="text" name="remind" id="remind" placeholder="" />
+
+						<button type="submit">Wyślij</button>
 					</form>
 				</main>
 			</div>
