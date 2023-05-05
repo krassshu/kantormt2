@@ -72,6 +72,7 @@ const userSchema = new mongoose.Schema({
 	username: { type: String, required: true, unique: true },
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
+	discordNick: { type: String, required: true },
 })
 
 const exchangeSchema = new mongoose.Schema({
@@ -186,47 +187,39 @@ app.post(
 )
 
 // Registration route
-app.post(
-	"/register",
-	[
-		check("username").notEmpty().withMessage("Username is required."),
-		check("email").isEmail().withMessage("Email is required."),
-		check("password")
-			.isLength({ min: 8 })
-			.withMessage("Password must be at least 8 characters long."),
-		check("passwordConfirmation")
-			.notEmpty()
-			.withMessage("Password confirmation is required."),
-	],
-	async (req, res) => {
-		const errors = validationResult(req)
-		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() })
-		}
 
-		const { username, email, password, passwordConfirmation } = req.body
+app.post("/register", async (req, res) => {
+	const { username, email, password, discordNick } = req.body
 
-		if (password !== passwordConfirmation)
-			return res.status(400).send("Passwords do not match.")
+	// if (password !== passwordConfirmation)
+	// 	return res.status(400).send("Hasła nie pasuja do siebie.")
 
-		let user = await User.findOne({ email })
-		if (user) return res.status(400).send("User already registered.")
+	let mail = await User.findOne({ email })
+	if (mail) return res.status(400).send("e-mail")
 
-		const salt = await bcrypt.genSalt(10)
-		const hashedPassword = await bcrypt.hash(password, salt)
+	let user = await User.findOne({ username })
+	if (user) return res.status(400).send("user")
 
-		user = new User({ username, email, password: hashedPassword })
-		await user.save()
+	let discord = await User.findOne({ discordNick })
+	if (discord) return res.status(400).send("discord")
 
-		const token = jwt.sign(
-			{ _id: user._id, username: user.username, email: user.email },
-			process.env.JWT_PRIVATE_KEY
-		)
-		res
-			.header("x-auth-token", token)
-			.send({ _id: user._id, username: user.username, email: user.email })
-	}
-)
+	const salt = await bcrypt.genSalt(10)
+	const hashedPassword = await bcrypt.hash(password, salt)
+
+	user = new User({ username, email, password: hashedPassword, discordNick }) // Add discordNick here
+	await user.save()
+
+	const token = jwt.sign(
+		{ _id: user._id, username: user.username, email: user.email },
+		process.env.JWT_PRIVATE_KEY
+	)
+	res.header("x-auth-token", token).send({
+		_id: user._id,
+		username: user.username,
+		email: user.email,
+		discordNick: user.discordNick,
+	})
+})
 
 // Exchange route
 app.post(

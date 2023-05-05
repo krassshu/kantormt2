@@ -12,7 +12,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="./assets/css/register.min.css" />
-		<script defer src="./assets/js/register.min.js"></script>
+		<script defer src="./assets/js/register.js"></script>
 	</head>
 
 	<body>
@@ -24,46 +24,66 @@
 				</div>
 				<main class="main">
 					<h1>Zarejestruj się!</h1>
-					<form class="form" id="register-form" action="" method="post">
+					<form
+						class="form"
+						id="register-form"
+						action="/register"
+						method="post"
+					>
 						<label for="email">Wprowadź adres e-mail <i>*</i></label>
 						<input
+							class="input-field"
 							type="email"
 							name="email"
 							id="email"
 							placeholder="xxxkoxwojxxx@kantor.pl"
 						/>
+						<p class="info">.</p>
 						<label for="metin-nick">Wybierz nick <i>*</i></label>
 						<input
+							class="input-field"
 							type="text"
 							name="metin-nick"
 							id="metin-nick"
-							placeholder="Temat"
+							placeholder="Metin"
 						/>
+						<p class="info">.</p>
 						<label for="discord-nick"
 							>Wpisz swój nick z Discord'a <i>*</i></label
 						>
 						<input
+							class="input-field"
 							type="text"
 							name="discord-nick"
 							id="discord-nick"
-							placeholder="Temat"
+							placeholder="Discord"
 						/>
+						<p class="info">.</p>
 						<label for="password">Wpisz hasło <i>*</i></label>
 						<input
+							class="input-field"
 							type="password"
 							name="password"
 							id="password"
-							placeholder=""
+							placeholder="Hasło"
 						/>
+						<p class="info">.</p>
 						<label for="password-conf">Powtórz hasło <i>*</i></label>
 						<input
+							class="input-field"
 							type="password"
 							name="password-conf"
 							id="password-conf"
-							placeholder=""
+							placeholder="Powtórz hasło"
 						/>
+						<p class="info">.</p>
 
-						<input type="checkbox" name="acceptance" id="acceptance" />
+						<input
+							class="input-field"
+							type="checkbox"
+							name="acceptance"
+							id="acceptance"
+						/>
 						<label for="acceptance">Akceptuje warunki regulaminu</label>
 						<button type="submit">Zarejestruj się</button>
 					</form>
