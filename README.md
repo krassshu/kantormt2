@@ -1,13 +1,15 @@
 # To do
 
 1. Panel logowania
-  - jak ma wygladac zalogowany użytkownik w prawym sidebarze 
-  - czy ma miec jakis prosty panel ( jakies statystyki, resetowanie hasla itp)
-  - strona z rejestracja i logowaniem do ktorej uzytkownik bedzie przenoszony gdy nie bedzie zalogowany a bedzie chcial np dokonac wymiany
+  - Stworzenie zalogowanego użytkownika
+  - Templatka historii wymian
+  - Strona z ustawieniami (zmiana nazwy discord, hasła i cos tam jeszcze)
+  - Sprawdzic to co zrobiłem do tej pory.
 2. Strona o nas
 3. Walidacja requestow 
   - wyrzucanie err gdy ktos nie wpisze hasla, maila, wprowadzi zle wartosci w jakies pole itp
+  - Stylowanie errorów na panelu rejestracji (w kodzie JS tej strony jest wszystko)
 4. Panel admina 
-  - co dodac?
-  - co zmienic?
+  - Walidacja
+5. Sprawdzenie czy wszystkie zmienne na stronie są zadeklarowane w app.js
 
