@@ -1,18 +1,20 @@
 require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
+const cookieParser = require("cookie-parser")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const nodemailer = require("nodemailer")
 const { check, validationResult } = require("express-validator")
 const path = require("path")
-const mime = require("mime-types")
 const fs = require("fs")
 
 const app = express()
 
 app.use(express.static(path.join(__dirname, "..", "public")))
 app.use(express.json())
+app.use(cookieParser())
+app.use(decodeToken)
 
 //Settings pages
 
@@ -118,6 +120,20 @@ function auth(req, res, next) {
 	}
 }
 
+// Middleware for user authentication
+function decodeToken(req, res, next) {
+	const token = req.cookies.token
+	if (!token) return next() // No token provided
+
+	try {
+		const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
+		req.user = decoded // Add decoded information to the request object
+		next()
+	} catch (ex) {
+		next() // Invalid token, proceed without adding user to req
+	}
+}
+
 // Error handling middleware
 app.use((err, req, res, next) => {
 	console.error(err.stack)
@@ -125,74 +141,66 @@ app.use((err, req, res, next) => {
 })
 
 // Login route
-app.post(
-	"/login",
-	[
-		check("username").notEmpty().withMessage("Username is required."),
-		check("password").notEmpty().withMessage("Password is required."),
-	],
-	async (req, res) => {
-		const errors = validationResult(req)
-		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() })
-		}
-
-		const { username, password } = req.body
-		const user = await User.findOne({ username })
-		if (!user) return res.status(400).send("Niewłaściwy login lub hasło.")
-
-		const validPassword = await bcrypt.compare(password, user.password)
-		if (!validPassword)
-			return res.status(400).send("Niewłaściwy login lub hasło.")
-
-		const token = jwt.sign(
-			{ _id: user._id, username: user.username, email: user.email },
-			process.env.JWT_PRIVATE_KEY
-		)
-		res.send(token)
+app.post("/login", async (req, res) => {
+	const errors = validationResult(req)
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() })
 	}
-)
+
+	const { username, password } = req.body
+	const user = await User.findOne({ username })
+	if (!user) return res.status(400).send("Niewłaściwy login lub hasło.")
+
+	const validPassword = await bcrypt.compare(password, user.password)
+	if (!validPassword)
+		return res.status(400).send("Niewłaściwy login lub hasło.")
+
+	const token = jwt.sign(
+		{ _id: user._id, username: user.username, email: user.email },
+		process.env.JWT_PRIVATE_KEY,
+		{ expiresIn: "7d" } // token will expire in 7 days
+	)
+	res.cookie("token", token, {
+		httpOnly: true,
+		maxAge: 7 * 24 * 60 * 60 * 1000,
+	}) // set cookie to expire in 7 days
+	res.send({ message: "Login successful" })
+})
 
 // Login admin route
-app.post(
-	"/loginadmin",
-	[
-		check("username").notEmpty().withMessage("Username is required."),
-		check("password").notEmpty().withMessage("Password is required."),
-	],
-	async (req, res) => {
-		const errors = validationResult(req)
-		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() })
-		}
-		const { username, password } = req.body
-		const admin = await Admin.findOne({ username })
-		if (!admin) return res.status(400).send("Invalid username or password.")
-
-		const validPassword = await bcrypt.compare(password, admin.password)
-		if (!validPassword)
-			return res.status(400).send("Invalid username or password.")
-
-		const token = jwt.sign(
-			{
-				_id: admin._id,
-				username: admin.username,
-				email: admin.email,
-				admin: true,
-			},
-			process.env.JWT_PRIVATE_KEY
-		)
-		res.send(token)
+app.post("/loginadmin", async (req, res) => {
+	const errors = validationResult(req)
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() })
 	}
-)
+	const { username, password } = req.body
+	const admin = await Admin.findOne({ username })
+	if (!admin) return res.status(400).send("Invalid username or password.")
+
+	const validPassword = await bcrypt.compare(password, admin.password)
+	if (!validPassword)
+		return res.status(400).send("Invalid username or password.")
+
+	const token = jwt.sign(
+		{
+			_id: admin._id,
+			username: admin.username,
+			email: admin.email,
+			admin: true,
+		},
+		process.env.JWT_PRIVATE_KEY,
+		{ expiresIn: "7d" } // token will expire in 7 days
+	)
+	res.cookie("token", token, {
+		httpOnly: true,
+		maxAge: 7 * 24 * 60 * 60 * 1000,
+	}) // set cookie to expire in 7 days
+	res.send({ message: "Login successful" })
+})
 
 // Registration route
-
 app.post("/registration", async (req, res) => {
 	const { username, email, password, discordNick } = req.body
-
-	// if (password !== passwordConfirmation)
-	// 	return res.status(400).send("Hasła nie pasuja do siebie.")
 
 	let mail = await User.findOne({ email })
 	if (mail) return res.status(400).send("e-mail")

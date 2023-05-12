@@ -10,10 +10,13 @@ function loadUser(user) {
 	options.classList.add("login__options")
 	const exHistory = document.createElement("a")
 	exHistory.setAttribute("href", "/historia-wymian")
+	exHistory.textContent = "Historia wymian"
 	const settings = document.createElement("a")
 	settings.setAttribute("href", "/ustawienia")
+	settings.textContent = "Ustawienia"
 	const exchange = document.createElement("a")
 	exchange.setAttribute("href", "/wymiana")
+	exchange.textContent = "Wymiana"
 	const logout = document.createElement("span")
 	logout.classList.add("logout")
 	logout.textContent = "Wyloguj się"
@@ -24,30 +27,6 @@ function loadUser(user) {
 	options.appendChild(settings)
 	options.appendChild(exchange)
 	loginBox.appendChild(logout)
-}
-
-async function handleLogin(token) {
-	const response = await fetch("/validate-token", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Authorization: `Bearer ${token}`,
-		},
-	})
-
-	if (response.ok) {
-		const user = await response.json()
-
-		loadUser(user)
-	} else {
-		console.error("Token validation failed")
-	}
-}
-
-// Check for a token when the page loads and attempt login
-const token = localStorage.getItem("x-auth-token")
-if (token) {
-	handleLogin(token)
 }
 
 function showError(input, errorInfo, message) {
@@ -96,14 +75,14 @@ loginForm.addEventListener("submit", async (event) => {
 		if (response.status === 400) {
 			const error = await response.text()
 			inputs.forEach((input, index) => {
-				showError(input[index], errorInfo[index], error)
+				showError(input, errorInfo[index], error)
 			})
 		}
 
 		const result = await response.json()
 		localStorage.setItem("x-auth-token", response.headers.get("x-auth-token"))
 
-		loadUser(user)
+		loadUser(result) // Use the response data instead of decodedUser
 	} catch (error) {
 		console.log("Error:", error)
 	}
