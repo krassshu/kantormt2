@@ -1,4 +1,4 @@
-const registrationForm = document.getElementById("register-form")
+const registrationForm = document.getElementById("registration-form")
 const mainContent = document.querySelector(".main")
 
 function showError(input, errorInfo, message) {
@@ -11,7 +11,6 @@ registrationForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
 	const inputs = document.querySelectorAll(".input-field")
 	const errorInfo = document.querySelectorAll(".info")
-
 	const formData = new FormData(registrationForm)
 	const email = formData.get("email")
 	const username = formData.get("metin-nick")
@@ -82,7 +81,7 @@ registrationForm.addEventListener("submit", async (event) => {
 	mainContent.appendChild(loadingIndicator)
 
 	try {
-		const response = await fetch("/register", {
+		const response = await fetch("/registration", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

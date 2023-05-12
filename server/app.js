@@ -139,11 +139,11 @@ app.post(
 
 		const { username, password } = req.body
 		const user = await User.findOne({ username })
-		if (!user) return res.status(400).send("Invalid username or password.")
+		if (!user) return res.status(400).send("Niewłaściwy login lub hasło.")
 
 		const validPassword = await bcrypt.compare(password, user.password)
 		if (!validPassword)
-			return res.status(400).send("Invalid username or password.")
+			return res.status(400).send("Niewłaściwy login lub hasło.")
 
 		const token = jwt.sign(
 			{ _id: user._id, username: user.username, email: user.email },
@@ -188,7 +188,7 @@ app.post(
 
 // Registration route
 
-app.post("/register", async (req, res) => {
+app.post("/registration", async (req, res) => {
 	const { username, email, password, discordNick } = req.body
 
 	// if (password !== passwordConfirmation)

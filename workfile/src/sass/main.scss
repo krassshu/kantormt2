@@ -1,5 +1,6 @@
-@use "main-styles.scss";
 @use "colors.scss" as *;
+
+@use "main-styles.scss";
 
 html {
 	min-width: 1440px;
@@ -420,6 +421,32 @@ body {
 				font-weight: 300;
 				text-transform: uppercase;
 			}
+		}
+		&__nick {
+			width: 100px;
+			height: 20px;
+			text-align: center;
+			background-image: url(../img/user_efect.gif);
+		}
+		&__options {
+			display: flex;
+			flex-direction: column;
+			a {
+				width: 170px;
+				margin-top: 18px;
+				padding: 8px;
+				text-align: center;
+				font-size: 16px;
+				text-decoration: none;
+				border: 1px solid $main-color;
+				border-radius: 8px;
+			}
+		}
+		.logout {
+			margin-top: 18px;
+			padding: 2px;
+			font-size: 16px;
+			cursor: pointer;
 		}
 	}
 

@@ -1,14 +1,16 @@
 <div class="login">
 	<span>Logowanie</span>
-	<form class="login__form" action="/login" method="post">
+	<form class="login__form" action="/login" method="post" id="login-form">
 		<div class="login__form-user">
 			<label for="user-name"></label>
 			<input
 				type="text"
 				name="username"
 				id="user-name"
+				class="input-field"
 				placeholder="Nazwa użytkownika"
 			/>
+			<p class="info">.</p>
 		</div>
 		<div class="login__form-passwd">
 			<label for="passwd"></label>
@@ -16,13 +18,22 @@
 				type="password"
 				name="password"
 				id="passwd"
+				class="input-field"
 				placeholder="Wprowadź hasło"
 			/>
+			<p class="info">.</p>
 		</div>
 		<button type="submit">Zaloguj się</button>
 	</form>
 	<p>Nie posiadasz jeszcze konta? <a href="/rejestracja">Dołącz teraz!</a></p>
 	<a href="/przypomnij-haslo">Przypomnij hasło</a>
+	<!-- <span class="login__nick">Aplik</span>
+	<div class="login__options">
+		<a href="/historia-wymian">Historia wymian</a>
+		<a href="/ustawienia">Ustawienia</a>
+		<a href="/wymiana">Poproś o wymianę</a>
+	</div>
+	<span class="logout">Wyloguj się</span> -->
 </div>
 <div class="admins">
 	<span>Administracja</span>
