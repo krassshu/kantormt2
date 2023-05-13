@@ -1,6 +1,33 @@
 const loginBox = document.querySelector(".login")
 const loginForm = document.getElementById("login-form")
 
+const storedUser = localStorage.getItem("username")
+if (storedUser) {
+	const user = JSON.parse(storedUser)
+	loadUser(user)
+	const logoutBtn = document.querySelector(".logout")
+	logoutBtn.addEventListener("click", async () => {
+		localStorage.removeItem("username")
+
+		try {
+			const response = await fetch("/logout", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+
+			if (response.ok) {
+				window.location.href = "/"
+			} else {
+				console.error("Logout failed")
+			}
+		} catch (error) {
+			console.log("Error:", error)
+		}
+	})
+}
+
 function loadUser(user) {
 	loginBox.innerHTML = ""
 	const nick = document.createElement("span")
@@ -17,7 +44,7 @@ function loadUser(user) {
 	const exchange = document.createElement("a")
 	exchange.setAttribute("href", "/wymiana")
 	exchange.textContent = "Wymiana"
-	const logout = document.createElement("span")
+	const logout = document.createElement("button")
 	logout.classList.add("logout")
 	logout.textContent = "Wyloguj się"
 
@@ -80,9 +107,11 @@ loginForm.addEventListener("submit", async (event) => {
 		}
 
 		const result = await response.json()
-		localStorage.setItem("x-auth-token", response.headers.get("x-auth-token"))
-
-		loadUser(result) // Use the response data instead of decodedUser
+		localStorage.setItem(
+			"username",
+			JSON.stringify({ username: result.username, _id: result._id })
+		)
+		loadUser({ username: result.username, _id: result._id })
 	} catch (error) {
 		console.log("Error:", error)
 	}

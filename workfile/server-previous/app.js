@@ -142,11 +142,6 @@ app.use((err, req, res, next) => {
 
 // Login route
 app.post("/login", async (req, res) => {
-	const errors = validationResult(req)
-	if (!errors.isEmpty()) {
-		return res.status(400).json({ errors: errors.array() })
-	}
-
 	const { username, password } = req.body
 	const user = await User.findOne({ username })
 	if (!user) return res.status(400).send("Niewłaściwy login lub hasło.")
@@ -164,7 +159,15 @@ app.post("/login", async (req, res) => {
 		httpOnly: true,
 		maxAge: 7 * 24 * 60 * 60 * 1000,
 	}) // set cookie to expire in 7 days
-	res.send({ message: "Login successful" })
+	res.send({
+		message: "Login successful",
+		username: user.username,
+		_id: user._id,
+	})
+})
+app.post("/logout", (req, res) => {
+	res.clearCookie("token")
+	res.send({ message: "Logout successful" })
 })
 
 // Login admin route
@@ -217,16 +220,16 @@ app.post("/registration", async (req, res) => {
 	user = new User({ username, email, password: hashedPassword, discordNick }) // Add discordNick here
 	await user.save()
 
-	const token = jwt.sign(
-		{ _id: user._id, username: user.username, email: user.email },
-		process.env.JWT_PRIVATE_KEY
-	)
-	res.header("x-auth-token", token).send({
-		_id: user._id,
-		username: user.username,
-		email: user.email,
-		discordNick: user.discordNick,
-	})
+	// const token = jwt.sign(
+	// 	{ _id: user._id, username: user.username, email: user.email },
+	// 	process.env.JWT_PRIVATE_KEY
+	// )
+	// res.header("x-auth-token", token).send({
+	// 	_id: user._id,
+	// 	username: user.username,
+	// 	email: user.email,
+	// 	discordNick: user.discordNick,
+	// })
 })
 
 // Exchange route
