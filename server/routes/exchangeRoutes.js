@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 const { validationResult, check } = require("express-validator")
-
 const { Exchange } = require("../models") // assuming you have this model
 
 const exchangeForm = async (req, res) => {
