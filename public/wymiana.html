@@ -12,7 +12,7 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="./assets/css/exchange.min.css" />
-		<script defer src="./assets/js/exchange.min.js"></script>
+		<script defer src="./assets/js/exchange.js"></script>
 		<script defer src="./assets/js/login.js"></script>
 	</head>
 
@@ -128,35 +128,59 @@
     </a>
 </div>				</div>
 				<main class="main">
+					
 					<h1>Formularz wymiany</h1>
-					<form class="form" id="exchange-form" action="" method="post">
+					<form class="form" id="exchange-form">
 						<label for="nick">Wprowadź nick z serwera</label>
-						<input type="text" name="" id="nick" placeholder="nick123" />
+						<input
+							class="form-input"
+							type="text"
+							name="server"
+							id="nick"
+							placeholder="nick123"
+						/>
+						<p class="info">.</p>
 						<label for="dsc-nick">Wprowadź nick z Discorda <i>*</i></label>
-						<input type="text" name="" id="dsc-nick" placeholder="nick#1234" />
+						<input
+							class="form-input"
+							type="text"
+							name="discord"
+							id="dsc-nick"
+							placeholder="nick#1234"
+						/>
+						<p class="info">.</p>
 						<p>Chcę wymienić wony</p>
 						<div class="exchange">
 							<label for="serv-from">Z serwera:</label>
 							<div class="exchange__tile">
-								<select name="" id="serv-from">
+								<select class="select" name="server-from" id="serv-from">
 									<option value="Glevia">Glevia</option>
 									<option value="Alune">Alune</option>
 								</select>
-								<input id="won-in" type="number" placeholder="Ilość won..." />
+								<input
+									class="form-input"
+									id="won-in"
+									type="number"
+									placeholder="Ilość won..."
+									name="server-from-value"
+								/>
 							</div>
+							<p class="info">.</p>
 							<label for="serv-to">Na serwer:</label>
 							<div class="exchange__tile">
-								<select name="" id="serv-to">
+								<select class="select" name="server-to" id="serv-to">
 									<option value="Alune">Alune</option>
 									<option value="Glevia">Glevia</option>
 								</select>
 								<input
+									class="form-input"
 									id="won-out"
 									type="number"
 									placeholder="Otrzymam..."
-									disabled
+									name="server-to-value"
 								/>
 							</div>
+							<p class="info">.</p>
 						</div>
 						<button type="submit">Poproś o wymianę</button>
 					</form>

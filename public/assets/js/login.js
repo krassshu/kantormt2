@@ -8,6 +8,7 @@ if (storedUser) {
 	loadUser(user)
 	const logoutBtn = document.querySelector(".logout")
 	logoutBtn.addEventListener("click", async () => {
+		localStorage.removeItem("username")
 		try {
 			const response = await fetch("/logout", {
 				method: "POST",

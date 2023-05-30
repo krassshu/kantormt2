@@ -30,7 +30,6 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
 	res.clearCookie("token")
-	res.clearCookie("username")
 	res.send({ message: "Logout successful" })
 }
 

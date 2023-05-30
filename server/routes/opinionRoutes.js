@@ -18,10 +18,6 @@ const postOpinion = async (req, res) => {
 	res.send(opinion)
 }
 
-router.post(
-	"/",
-	[check("text").notEmpty().withMessage("Opinion text is required.")],
-	postOpinion
-)
+router.post("/", postOpinion)
 
 module.exports = router
