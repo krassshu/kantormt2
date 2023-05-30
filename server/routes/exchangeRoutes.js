@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { check } = require("express-validator")
+const { validationResult, check } = require("express-validator")
 const { Exchange } = require("../models") // assuming you have this model
 
 const exchangeForm = async (req, res) => {
@@ -9,7 +9,7 @@ const exchangeForm = async (req, res) => {
 		return res.status(400).json({ errors: errors.array() })
 	}
 
-	const { serverFrom, serverTo, amountFrom, amountTo } = req.body
+	const { serverFrom, serverTo, amountFrom, amountTo, discordNick } = req.body
 	const username = req.user.username
 
 	const exchange = new Exchange({
@@ -18,6 +18,7 @@ const exchangeForm = async (req, res) => {
 		amountFrom,
 		amountTo,
 		username,
+		discordNick,
 	})
 	await exchange.save()
 

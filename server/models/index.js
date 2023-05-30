@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 // Define your schemas here...
 
@@ -21,6 +21,7 @@ const exchangeSchema = new mongoose.Schema({
 const opinionSchema = new mongoose.Schema({
 	username: { type: String, required: true },
 	text: { type: String, required: true },
+	date: { type: String },
 })
 
 const adminSchema = new mongoose.Schema({

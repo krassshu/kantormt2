@@ -12,7 +12,8 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="./assets/css/opinion.min.css" />
-		<script defer src="./assets/js/opinion.min.js"></script>
+		<script defer src="./assets/js/login.js"></script>
+		<script defer src="./assets/js/opinion.js"></script>
 	</head>
 
 	<body>
@@ -25,7 +26,7 @@
 				<main class="main">
 					<h1>Opinie o nas</h1>
 					<div class="opinions">
-						<form action="/opinion" method="post" class="opinions__form">
+						<form id="opinion-form" class="opinions__form">
 							<div class="opinions__form-inputs">
 								<label for="op-nick">Wprowadź nick</label>
 								<input
@@ -41,6 +42,7 @@
 								<textarea
 									type="text"
 									name="text"
+									class="content"
 									id="op-content"
 									minlength="4"
 									maxlength="150"
@@ -49,6 +51,7 @@
 									placeholder="Opinia... (max 150 słów)"
 									required
 								></textarea>
+								<p class="info">.</p>
 							</div>
 							<button type="submit">Prześlij opinię</button>
 						</form>
