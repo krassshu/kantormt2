@@ -21,14 +21,6 @@ const login = async (req, res) => {
 		httpOnly: true,
 		maxAge: 7 * 24 * 60 * 60 * 1000,
 	}) // set cookie to expire in 7 days
-	res.cookie(
-		"username",
-		JSON.stringify({ _id: user._id, username: user.username }),
-		{
-			httpOnly: false,
-			maxAge: 7 * 24 * 60 * 60 * 1000, // Expiration time in milliseconds (7 days)
-		}
-	)
 	res.send({
 		message: "Login successful",
 		username: user.username,
