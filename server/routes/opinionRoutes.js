@@ -13,8 +13,8 @@ const postOpinion = async (req, res) => {
 	const { text } = req.body
 	const username = req.user.username
 	const currentDate = new Date()
-	let month = currentDate.getMonth() + 1
-	let day = currentDate.getDate()
+	const month = currentDate.getMonth() + 1
+	const day = currentDate.getDate()
 	if (day < 10) {
 		day = `0${day}`
 	}
