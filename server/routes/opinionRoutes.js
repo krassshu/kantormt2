@@ -16,10 +16,10 @@ const postOpinion = async (req, res) => {
 	const month = currentDate.getMonth() + 1
 	const day = currentDate.getDate()
 	if (day < 10) {
-		day = `0${day}`
+		day === `0${day}`
 	}
 	if (month < 10) {
-		month = `0${month}`
+		month === `0${month}`
 	}
 	const date = `${day}.${month}.${currentDate.getFullYear()}r.`
 
