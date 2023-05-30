@@ -2,13 +2,12 @@ const loginBox = document.querySelector(".login")
 const loginForm = document.getElementById("login-form")
 
 const storedUser = localStorage.getItem("username")
+
 if (storedUser) {
 	const user = JSON.parse(storedUser)
 	loadUser(user)
 	const logoutBtn = document.querySelector(".logout")
 	logoutBtn.addEventListener("click", async () => {
-		localStorage.removeItem("username")
-
 		try {
 			const response = await fetch("/logout", {
 				method: "POST",
@@ -107,10 +106,6 @@ loginForm.addEventListener("submit", async (event) => {
 		}
 
 		const result = await response.json()
-		localStorage.setItem(
-			"username",
-			JSON.stringify({ username: result.username, _id: result._id })
-		)
 		loadUser({ username: result.username, _id: result._id })
 	} catch (error) {
 		console.log("Error:", error)
