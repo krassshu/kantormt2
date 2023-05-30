@@ -107,10 +107,15 @@ loginForm.addEventListener("submit", async (event) => {
 		}
 
 		const result = await response.json()
-		localStorage.setItem(
-			"username",
-			JSON.stringify({ username: result.username, _id: result._id })
-		)
+
+		const item = {
+			username: result.username,
+			_id: result._id,
+			expiration: Date.now() + 7 * 24 * 60 * 60 * 1000, // Expiration time in milliseconds (7 days)
+		}
+
+		localStorage.setItem("username", JSON.stringify(item))
+
 		loadUser({ username: result.username, _id: result._id })
 	} catch (error) {
 		console.log("Error:", error)
