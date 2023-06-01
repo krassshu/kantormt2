@@ -25,7 +25,7 @@ registrationForm.addEventListener("submit", async (event) => {
 		!password ||
 		!passwordConfirmation ||
 		!discordNick ||
-		!acceptance
+		acceptance !== "on"
 	) {
 		inputs.forEach((input, index) => {
 			if (input.value.trim() === "") {
@@ -74,7 +74,6 @@ registrationForm.addEventListener("submit", async (event) => {
 		return
 	}
 
-	// Show a loading indicator during the registration process
 	const loadingIndicator = document.createElement("div")
 	loadingIndicator.classList.add("loading")
 	loadingIndicator.textContent = "Rejestrowanie..."
@@ -90,15 +89,40 @@ registrationForm.addEventListener("submit", async (event) => {
 				username,
 				email,
 				password,
-				passwordConfirmation,
 				discordNick,
 			}),
+		}).catch((error) => {
+			console.error("Error during fetch: ", error)
 		})
 
-		// Remove the loading indicator when the registration process is finished
 		mainContent.removeChild(loadingIndicator)
 
-		if (response.status === 400) {
+		if (response.ok) {
+			const result = await response.json()
+			localStorage.setItem("x-auth-token", response.headers.get("x-auth-token"))
+
+			mainContent.innerHTML = ""
+			const newDiv = document.createElement("div")
+			newDiv.classList.add("success")
+			const title = document.createElement("span")
+			title.classList.add("success__title")
+			title.textContent = "Pomyślnie założono konto!"
+			const userName = document.createElement("p")
+			userName.classList.add("success__p")
+			userName.textContent = `Twój nick to: ${result.username}`
+			const mail = document.createElement("p")
+			mail.classList.add("success__p")
+			mail.textContent = `Twój mail to: ${result.email}`
+			const discordnick = document.createElement("p")
+			discordnick.classList.add("success__p")
+			discordnick.textContent = `Twój nick z Discord'a to: ${result.discordNick}`
+
+			newDiv.appendChild(title)
+			newDiv.appendChild(userName)
+			newDiv.appendChild(mail)
+			newDiv.appendChild(discordnick)
+			mainContent.appendChild(newDiv)
+		} else {
 			const error = await response.text()
 			if (error === "e-mail") {
 				showError(
@@ -120,31 +144,7 @@ registrationForm.addEventListener("submit", async (event) => {
 				)
 			}
 		}
-
-		const result = await response.json()
-		localStorage.setItem("x-auth-token", response.headers.get("x-auth-token"))
-
-		mainContent.innerHTML = ""
-		const newDiv = document.createElement("div")
-		newDiv.classList.add("success")
-		const title = document.createElement("span")
-		title.classList.add("success__title")
-		title.textContent = "Pomyślnie założono konto!"
-		const userName = document.createElement("p")
-		userName.classList.add("success__p")
-		userName.textContent = `Twój nick to: ${result.username}`
-		const mail = document.createElement("p")
-		mail.classList.add("success__p")
-		mail.textContent = `Twój mail to: ${result.email}`
-		const discordnick = document.createElement("p")
-		discordnick.classList.add("success__p")
-		discordnick.textContent = `Twój nick z Discord'a to: ${result.discordNick}`
-
-		newDiv.appendChild(title)
-		newDiv.appendChild(userName)
-		newDiv.appendChild(mail)
-		newDiv.appendChild(discordnick)
-		mainContent.appendChild(newDiv)
+		localStorage.removeItem("x-auth-token")
 		setTimeout(() => {
 			window.location.href = "/"
 		}, 5000)

@@ -51,8 +51,6 @@ exchangeForm.addEventListener("submit", async (event) => {
 	const loadingIndicator = document.createElement("div")
 	loadingIndicator.classList.add("loading")
 	loadingIndicator.textContent = "Przetwarzanie..."
-	// Append the loading indicator to the appropriate element
-	// Replace loginBox with the appropriate element in your code
 	exchangeForm.appendChild(loadingIndicator)
 
 	try {
@@ -72,6 +70,11 @@ exchangeForm.addEventListener("submit", async (event) => {
 		})
 
 		exchangeForm.removeChild(loadingIndicator)
+
+		if (response.status === 401 ){
+			const error = await response.text()
+			
+		}
 
 		// Stworzenie informacji o problemie po polsku
 		if (response.status === 400) {

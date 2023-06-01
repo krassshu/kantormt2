@@ -6,14 +6,20 @@ const { User, Admin } = require("../models")
 const login = async (req, res) => {
 	const { username, password } = req.body
 	const user = await User.findOne({ username })
-	if (!user) return res.status(400).send("Niewłaściwy login lub hasło.")
+	if (!user)
+		return res.status(400).json({ error: "Niewłaściwy login lub hasło." })
 
 	const validPassword = await bcrypt.compare(password, user.password)
 	if (!validPassword)
-		return res.status(400).send("Niewłaściwy login lub hasło.")
+		return res.status(400).json({ error: "Niewłaściwy login lub hasło." })
 
 	const token = jwt.sign(
-		{ _id: user._id, username: user.username, email: user.email },
+		{
+			_id: user._id,
+			username: user.username,
+			email: user.email,
+			discordNick: user.discordNick, // Change "discord" to "discordNick"
+		},
 		process.env.JWT_PRIVATE_KEY,
 		{ expiresIn: "7d" } // token will expire in 7 days
 	)
@@ -80,6 +86,12 @@ const registration = async (req, res) => {
 
 	user = new User({ username, email, password: hashedPassword, discordNick }) // Add discordNick here
 	await user.save()
+	res.send({
+		message: "Registration successful",
+		username: user.username,
+		email: user.email,
+		discord: user.discordNick,
+	})
 }
 
 module.exports = { login, logout, loginadmin, registration }
