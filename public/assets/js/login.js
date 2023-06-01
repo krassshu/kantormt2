@@ -65,7 +65,7 @@ function showError(input, errorInfo, message) {
 loginForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
 
-	const inputs = document.querySelectorAll(".input-field")
+	const inputs = document.querySelectorAll(".login-field")
 	const errorInfo = document.querySelectorAll(".login-info")
 	const formData = new FormData(loginForm)
 	const username = formData.get("username")

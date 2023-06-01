@@ -1,5 +1,7 @@
 const registrationForm = document.getElementById("registration-form")
 const mainContent = document.querySelector(".main")
+const inputs = document.querySelectorAll(".input-field")
+const errorInfo = document.querySelectorAll(".info")
 
 function showError(input, errorInfo, message) {
 	input.style.border = "1px solid #d70000"
@@ -7,10 +9,19 @@ function showError(input, errorInfo, message) {
 	errorInfo.textContent = message
 }
 
+function removeError(input, errorInfo) {
+	input.style.border = ""
+	errorInfo.classList.remove("error-field")
+}
+
+inputs.forEach((input, index) => {
+	input.addEventListener("input", () => {
+		removeError(input, errorInfo[index])
+	})
+})
+
 registrationForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
-	const inputs = document.querySelectorAll(".input-field")
-	const errorInfo = document.querySelectorAll(".info")
 	const formData = new FormData(registrationForm)
 	const email = formData.get("email")
 	const username = formData.get("metin-nick")
@@ -24,15 +35,27 @@ registrationForm.addEventListener("submit", async (event) => {
 		!email ||
 		!password ||
 		!passwordConfirmation ||
-		!discordNick ||
-		acceptance !== "on"
+		!discordNick
 	) {
 		inputs.forEach((input, index) => {
 			if (input.value.trim() === "") {
 				showError(input, errorInfo[index], "To pole jest wymagane")
 			}
 		})
+		return
+	}
+	if (acceptance !== "on") {
 		inputs[5].labels[0].style.color = "#d70000"
+		return
+	}
+
+	if (!discordNick.includes("#")) {
+		showError(inputs[2], errorInfo[2], "Zły nick Discord'a")
+		return
+	}
+
+	if (discordNick.split("#")[1].length !== 4) {
+		showError(inputs[2], errorInfo[2], "Zły nick Discord'a")
 		return
 	}
 
@@ -91,8 +114,6 @@ registrationForm.addEventListener("submit", async (event) => {
 				password,
 				discordNick,
 			}),
-		}).catch((error) => {
-			console.error("Error during fetch: ", error)
 		})
 
 		mainContent.removeChild(loadingIndicator)
