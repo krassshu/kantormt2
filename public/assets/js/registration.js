@@ -1,5 +1,7 @@
 const registrationForm = document.getElementById("registration-form")
 const mainContent = document.querySelector(".main")
+const inputs = document.querySelectorAll(".input-field")
+const errorInfo = document.querySelectorAll(".info")
 
 function showError(input, errorInfo, message) {
 	input.style.border = "1px solid #d70000"
@@ -7,10 +9,19 @@ function showError(input, errorInfo, message) {
 	errorInfo.textContent = message
 }
 
+function removeError(input, errorInfo) {
+	input.style.border = ""
+	errorInfo.classList.remove("error-field")
+}
+
+inputs.forEach((input, index) => {
+	input.addEventListener("input", () => {
+		removeError(input, errorInfo[index])
+	})
+})
+
 registrationForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
-	const inputs = document.querySelectorAll(".input-field")
-	const errorInfo = document.querySelectorAll(".info")
 	const formData = new FormData(registrationForm)
 	const email = formData.get("email")
 	const username = formData.get("metin-nick")
@@ -24,15 +35,27 @@ registrationForm.addEventListener("submit", async (event) => {
 		!email ||
 		!password ||
 		!passwordConfirmation ||
-		!discordNick ||
-		!acceptance
+		!discordNick
 	) {
 		inputs.forEach((input, index) => {
 			if (input.value.trim() === "") {
 				showError(input, errorInfo[index], "To pole jest wymagane")
 			}
 		})
+		return
+	}
+	if (acceptance !== "on") {
 		inputs[5].labels[0].style.color = "#d70000"
+		return
+	}
+
+	if (!discordNick.includes("#")) {
+		showError(inputs[2], errorInfo[2], "Zły nick Discord'a")
+		return
+	}
+
+	if (discordNick.split("#")[1].length !== 4) {
+		showError(inputs[2], errorInfo[2], "Zły nick Discord'a")
 		return
 	}
 
@@ -74,7 +97,6 @@ registrationForm.addEventListener("submit", async (event) => {
 		return
 	}
 
-	// Show a loading indicator during the registration process
 	const loadingIndicator = document.createElement("div")
 	loadingIndicator.classList.add("loading")
 	loadingIndicator.textContent = "Rejestrowanie..."
@@ -90,15 +112,38 @@ registrationForm.addEventListener("submit", async (event) => {
 				username,
 				email,
 				password,
-				passwordConfirmation,
 				discordNick,
 			}),
 		})
 
-		// Remove the loading indicator when the registration process is finished
 		mainContent.removeChild(loadingIndicator)
 
-		if (response.status === 400) {
+		if (response.ok) {
+			const result = await response.json()
+			localStorage.setItem("x-auth-token", response.headers.get("x-auth-token"))
+
+			mainContent.innerHTML = ""
+			const newDiv = document.createElement("div")
+			newDiv.classList.add("success")
+			const title = document.createElement("span")
+			title.classList.add("success__title")
+			title.textContent = "Pomyślnie założono konto!"
+			const userName = document.createElement("p")
+			userName.classList.add("success__p")
+			userName.textContent = `Twój nick to: ${result.username}`
+			const mail = document.createElement("p")
+			mail.classList.add("success__p")
+			mail.textContent = `Twój mail to: ${result.email}`
+			const discordnick = document.createElement("p")
+			discordnick.classList.add("success__p")
+			discordnick.textContent = `Twój nick z Discord'a to: ${result.discordNick}`
+
+			newDiv.appendChild(title)
+			newDiv.appendChild(userName)
+			newDiv.appendChild(mail)
+			newDiv.appendChild(discordnick)
+			mainContent.appendChild(newDiv)
+		} else {
 			const error = await response.text()
 			if (error === "e-mail") {
 				showError(
@@ -120,31 +165,7 @@ registrationForm.addEventListener("submit", async (event) => {
 				)
 			}
 		}
-
-		const result = await response.json()
-		localStorage.setItem("x-auth-token", response.headers.get("x-auth-token"))
-
-		mainContent.innerHTML = ""
-		const newDiv = document.createElement("div")
-		newDiv.classList.add("success")
-		const title = document.createElement("span")
-		title.classList.add("success__title")
-		title.textContent = "Pomyślnie założono konto!"
-		const userName = document.createElement("p")
-		userName.classList.add("success__p")
-		userName.textContent = `Twój nick to: ${result.username}`
-		const mail = document.createElement("p")
-		mail.classList.add("success__p")
-		mail.textContent = `Twój mail to: ${result.email}`
-		const discordnick = document.createElement("p")
-		discordnick.classList.add("success__p")
-		discordnick.textContent = `Twój nick z Discord'a to: ${result.discordNick}`
-
-		newDiv.appendChild(title)
-		newDiv.appendChild(userName)
-		newDiv.appendChild(mail)
-		newDiv.appendChild(discordnick)
-		mainContent.appendChild(newDiv)
+		localStorage.removeItem("x-auth-token")
 		setTimeout(() => {
 			window.location.href = "/"
 		}, 5000)

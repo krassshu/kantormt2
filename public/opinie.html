@@ -132,16 +132,6 @@
 					<div class="opinions">
 						<form id="opinion-form" class="opinions__form">
 							<div class="opinions__form-inputs">
-								<label for="op-nick">Wprowadź nick</label>
-								<input
-									type="text"
-									name="username"
-									id="op-nick"
-									placeholder="nick123"
-									required
-								/>
-							</div>
-							<div class="opinions__form-inputs">
 								<label for="op-content">Napisz swoją opinię</label>
 								<textarea
 									type="text"
@@ -153,7 +143,6 @@
 									cols="30"
 									rows="6"
 									placeholder="Opinia... (max 150 słów)"
-									required
 								></textarea>
 								<p class="info">.</p>
 							</div>
@@ -260,17 +249,17 @@
 				<div class="right-sitebar">
 					<div class="login">
 	<span>Logowanie</span>
-	<form class="login__form" action="/login" method="post" id="login-form">
+	<form class="login__form" id="login-form">
 		<div class="login__form-user">
 			<label for="user-name"></label>
 			<input
 				type="text"
 				name="username"
 				id="user-name"
-				class="input-field"
+				class="login-field"
 				placeholder="Nazwa użytkownika"
 			/>
-			<p class="info">.</p>
+			<p class="login-info">.</p>
 		</div>
 		<div class="login__form-passwd">
 			<label for="passwd"></label>
@@ -278,10 +267,10 @@
 				type="password"
 				name="password"
 				id="passwd"
-				class="input-field"
+				class="login-field"
 				placeholder="Wprowadź hasło"
 			/>
-			<p class="info">.</p>
+			<p class="login-info">.</p>
 		</div>
 		<button type="submit">Zaloguj się</button>
 	</form>

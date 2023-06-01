@@ -57,7 +57,7 @@ function loadUser(user) {
 }
 
 function showError(input, errorInfo, message) {
-	input.style.border = "1px solid #d7000"
+	input.style.border = "1px solid #d70000"
 	errorInfo.classList.add("error-field")
 	errorInfo.textContent = message
 }
@@ -65,8 +65,8 @@ function showError(input, errorInfo, message) {
 loginForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
 
-	const inputs = document.querySelectorAll(".input-field")
-	const errorInfo = document.querySelectorAll(".info")
+	const inputs = document.querySelectorAll(".login-field")
+	const errorInfo = document.querySelectorAll(".login-info")
 	const formData = new FormData(loginForm)
 	const username = formData.get("username")
 	const password = formData.get("password")
@@ -100,13 +100,20 @@ loginForm.addEventListener("submit", async (event) => {
 		loginBox.removeChild(loadingIndicator)
 
 		if (response.status === 400) {
-			const error = await response.text()
 			inputs.forEach((input, index) => {
-				showError(input, errorInfo[index], error)
+				showError(input, errorInfo[index], "Niewłaściwy login lub hasło.")
 			})
+			return
 		}
-
-		const result = await response.json()
+		if (!response.ok) {
+			const errorData = await response.json()
+			console.log(errorData)
+			inputs.forEach((input, index) => {
+				showError(input, errorInfo[index], errorData.error)
+			})
+		} else {
+			const result = await response.json()
+		}
 
 		const item = {
 			username: result.username,
