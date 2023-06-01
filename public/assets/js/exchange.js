@@ -1,4 +1,7 @@
 const exchangeForm = document.getElementById("exchange-form")
+const inputs = document.querySelectorAll(".form-input")
+const select = document.querySelectorAll(".select")
+const errorInfo = document.querySelectorAll(".info")
 
 function showError(input, errorInfo, message) {
 	input.style.border = "1px solid #d70000"
@@ -6,12 +9,21 @@ function showError(input, errorInfo, message) {
 	errorInfo.textContent = message
 }
 
+function removeError(input, errorInfo) {
+	input.style.border = ""
+	errorInfo.classList.remove("error-field")
+	errorInfo.textContent = ""
+}
+
+inputs.forEach((input, index) => {
+	input.addEventListener("input", () => {
+		removeError(input, errorInfo[index])
+	})
+})
+
 exchangeForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
 
-	const inputs = document.querySelectorAll(".form-input")
-	const select = document.querySelectorAll(".select")
-	const errorInfo = document.querySelectorAll(".info")
 	const formData = new FormData(exchangeForm)
 	const username = formData.get("server")
 	const discordNick = formData.get("discord")
@@ -35,8 +47,8 @@ exchangeForm.addEventListener("submit", async (event) => {
 		select.forEach((el) => {
 			el.style.border = "1px solid #d70000"
 		})
-		errorInfo[2].classList.add("error-field")
-		errorInfo[3].textContent = "Te pola nie mogą być takie same"
+		errorInfo[1].classList.add("error-field")
+		errorInfo[2].textContent = "Te pola nie mogą być takie same"
 		hasError = true
 	}
 
@@ -71,9 +83,8 @@ exchangeForm.addEventListener("submit", async (event) => {
 
 		exchangeForm.removeChild(loadingIndicator)
 
-		if (response.status === 401 ){
+		if (response.status === 401) {
 			const error = await response.text()
-			
 		}
 
 		// Stworzenie informacji o problemie po polsku
