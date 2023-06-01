@@ -10,6 +10,10 @@ const postOpinion = async (req, res) => {
 		return res.status(400).json({ errors: errors.array() })
 	}
 
+	if (!req.user || !req.user.username) {
+		return res.status(401).send("Musisz być zalogowany by wystawić opinię")
+	}
+
 	const { text } = req.body
 	const username = req.user.username
 	const currentDate = new Date()
