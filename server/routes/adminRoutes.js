@@ -10,6 +10,6 @@ const {
 
 router.post("/article", decodeToken, newArticle)
 router.patch("/rates", newRates)
-// router.patch("/remaning", newRemaning)
+router.patch("/remaning", newRemaning)
 
 module.exports = router

@@ -35,6 +35,7 @@ const exchangeForm = async (req, res) => {
 		minutes = `0${minutes}`
 	}
 	const date = `${hours}:${minutes} ${day}/${month}/${currentDate.getFullYear()}`
+	const resolved = false
 
 	const exchange = new Exchange({
 		userId,
@@ -45,6 +46,7 @@ const exchangeForm = async (req, res) => {
 		serverTo,
 		amountTo,
 		date,
+		resolved,
 	})
 	await exchange.save()
 

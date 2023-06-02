@@ -18,6 +18,7 @@ const exchangeSchema = new mongoose.Schema({
 	serverTo: { type: String, required: true },
 	amountTo: { type: Number, required: true },
 	date: { type: String },
+	resolved: { type: Boolean },
 })
 
 const opinionSchema = new mongoose.Schema({

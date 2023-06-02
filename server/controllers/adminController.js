@@ -1,6 +1,3 @@
-const bcrypt = require("bcrypt")
-const jwt = require("jsonwebtoken")
-// const { validationResult } = require("express-validator")
 const { Post, Currency, Admin } = require("../models")
 
 const newArticle = async (req, res) => {
@@ -29,10 +26,8 @@ const newArticle = async (req, res) => {
 
 const newRates = async (req, res) => {
 	try {
-		// Przyjmij dane z żądania
 		const { glevia, alune, pangea, samia, valium, ervelia } = req.body.rates
 
-		// Znajdź i zaktualizuj wartości w bazie danych
 		const update = await Currency.findOneAndUpdate(
 			{},
 			{
@@ -44,28 +39,55 @@ const newRates = async (req, res) => {
 				"rates.ervelia": ervelia,
 			},
 			{
-				new: true, // Ta opcja zwraca nową wersję dokumentu po aktualizacji
+				new: true,
 			}
 		)
 
-		// Jeżeli nie udało się zaktualizować dokumentu, wyślij odpowiednią informację
 		if (!update) {
 			res.status(404).json({ message: "Nie można zaktualizować kursów" })
 			return
 		}
 
-		// Wyślij potwierdzenie, że operacja zakończyła się sukcesem
 		res.json({ message: "Kursy zaktualizowane pomyślnie", data: update })
 	} catch (err) {
-		// Obsłuż błędy
-		res
-			.status(500)
-			.json({
-				message: "Wystąpił błąd podczas aktualizacji kursów",
-				error: err.message,
-			})
+		res.status(500).json({
+			message: "Wystąpił błąd podczas aktualizacji kursów",
+			error: err.message,
+		})
 	}
 }
 
-module.exports = { newArticle, newRates }
-// , newRemaning
+const newRemaning = async (req, res) => {
+	try {
+		const { glevia, alune, pangea, samia, valium, ervelia } = req.body.remaning
+
+		const update = await Currency.findOneAndUpdate(
+			{},
+			{
+				"remaning.glevia": glevia,
+				"remaning.alune": alune,
+				"remaning.pangea": pangea,
+				"remaning.samia": samia,
+				"remaning.valium": valium,
+				"remaning.ervelia": ervelia,
+			},
+			{
+				new: true,
+			}
+		)
+
+		if (!update) {
+			res.status(404).json({ message: "Nie można zaktualizować kursów" })
+			return
+		}
+
+		res.json({ message: "Kursy zaktualizowane pomyślnie", data: update })
+	} catch (err) {
+		res.status(500).json({
+			message: "Wystąpił błąd podczas aktualizacji kursów",
+			error: err.message,
+		})
+	}
+}
+
+module.exports = { newArticle, newRates, newRemaning }
