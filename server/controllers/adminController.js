@@ -89,5 +89,31 @@ const newRemaning = async (req, res) => {
 		})
 	}
 }
+const getRates = async (req, res) => {
+	try {
+		const rates = await Currency.findOne()
+		if (!rates) {
+			res.status(404).json({ message: "Kursy nie zostały znalezione" })
+			return
+		}
+		res.json(rates.rates)
+	} catch (error) {
+		console.log(error)
+		res.status(500).send("Wystąpił błąd podczas pobierania kursów")
+	}
+}
 
-module.exports = { newArticle, newRates, newRemaning }
+const getRemaning = async (req, res) => {
+	try {
+		const remaning = await Currency.findOne()
+		if (!remaning) {
+			res.status(404).json({ message: "Pozostałe wony nie zostały znalezione" })
+			return
+		}
+		res.json(remaning.remaning)
+	} catch (error) {
+		console.log(error)
+		res.status(500).send("Wystąpił błąd podczas pobierania pozostałości")
+	}
+}
+module.exports = { newArticle, newRates, newRemaning, getRates, getRemaning }
