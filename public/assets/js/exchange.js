@@ -25,7 +25,7 @@ exchangeForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
 
 	const formData = new FormData(exchangeForm)
-	const username = formData.get("server")
+	const serverNick = formData.get("serverNick")
 	const discordNick = formData.get("discord")
 	const serverFrom = formData.get("server-from")
 	const amountFrom = formData.get("server-from-value")
@@ -34,7 +34,7 @@ exchangeForm.addEventListener("submit", async (event) => {
 
 	let hasError = false
 
-	if (!username || !discordNick || !amountFrom || !amountTo) {
+	if (!serverNick || !discordNick || !amountFrom || !amountTo) {
 		inputs.forEach((input, index) => {
 			if (input.value.trim() === "") {
 				showError(input, errorInfo[index], "To pole jest wymagane")
@@ -76,7 +76,7 @@ exchangeForm.addEventListener("submit", async (event) => {
 				serverTo,
 				amountFrom,
 				amountTo,
-				username,
+				serverNick,
 				discordNick,
 			}),
 		})
