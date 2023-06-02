@@ -9,6 +9,7 @@ const authRoutes = require("./routes/authRoutes")
 // const supportRoutes = require("./routes/supportRoutes")
 const exchangeRoutes = require("./routes/exchangeRoutes")
 const opinionRoutes = require("./routes/opinionRoutes")
+const adminRoutes = require("./routes/adminRoutes")
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use(decodeToken)
 
 // Import and use the routes
 app.use("/", authRoutes)
+app.use("/", adminRoutes)
 // app.use("/support", supportRoutes)
 app.use("/exchange", exchangeRoutes)
 app.use("/opinion", opinionRoutes)

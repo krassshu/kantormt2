@@ -31,10 +31,36 @@ const adminSchema = new mongoose.Schema({
 	password: { type: String, required: true },
 })
 
+const postSchema = new mongoose.Schema({
+	username: { type: String },
+	content: { type: String, required: true },
+	date: { type: String },
+})
+
+const currencySchema = new mongoose.Schema({
+	rates: {
+		glevia: { type: String },
+		alune: { type: String },
+		pangea: { type: String },
+		samia: { type: String },
+		valium: { type: String },
+		ervelia: { type: String },
+	},
+	remaning: {
+		glevia: { type: String },
+		alune: { type: String },
+		pangea: { type: String },
+		samia: { type: String },
+		valium: { type: String },
+		ervelia: { type: String },
+	},
+})
 // Create models from the schemas
 const User = mongoose.model("User", userSchema)
 const Exchange = mongoose.model("Exchange", exchangeSchema)
 const Opinion = mongoose.model("Opinion", opinionSchema)
 const Admin = mongoose.model("Admin", adminSchema)
+const Post = mongoose.model("Post", postSchema)
+const Currency = mongoose.model("Currency", currencySchema)
 
-module.exports = { User, Exchange, Opinion, Admin }
+module.exports = { User, Exchange, Opinion, Admin, Post, Currency }
