@@ -1,3 +1,11 @@
+const adminNick = document.querySelector(".nav__nick")
+const storedUser = localStorage.getItem("6546613999528")
+
+if (storedUser) {
+	const nick = JSON.parse(storedUser)
+	adminNick.textContent = nick.username
+}
+
 async function changeTicketStatus(id, status, currentFilterStatus) {
 	try {
 		const response = await fetch("/exchange", {
@@ -11,7 +19,7 @@ async function changeTicketStatus(id, status, currentFilterStatus) {
 		}
 
 		const data = await response.json()
-		console.log(data.message)
+		// console.log(data.message)
 
 		displayTickets(currentFilterStatus)
 	} catch (error) {

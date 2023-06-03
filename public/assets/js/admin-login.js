@@ -24,6 +24,12 @@ loginForm.addEventListener("submit", async (event) => {
 			console.log(error)
 		} else {
 			const result = await response.json()
+
+			const item = {
+				username: result.username,
+			}
+			localStorage.setItem("6546613999528", JSON.stringify(item))
+
 			window.location.href = result.redirectUrl
 		}
 	} catch (error) {

@@ -1,6 +1,13 @@
 const postForm = document.getElementById("post-form")
 const ratesForm = document.getElementById("rates-form")
 const remaningForm = document.getElementById("remaning-form")
+const adminNick = document.querySelector(".nav__nick")
+const storedUser = localStorage.getItem("6546613999528")
+
+if (storedUser) {
+	const nick = JSON.parse(storedUser)
+	adminNick.textContent = nick.username
+}
 
 async function getData(endpoint) {
 	try {
@@ -119,7 +126,7 @@ ratesForm.addEventListener("submit", async (event) => {
 		} else {
 			const result = await response.json()
 			const updatedRemaning = await getData("/rates")
-			console.log(updatedRemaning)
+			// console.log(updatedRemaning)
 		}
 		ratesForm.removeChild(loadingIndicator)
 	} catch (error) {
@@ -166,7 +173,7 @@ remaningForm.addEventListener("submit", async (event) => {
 		} else {
 			const result = await response.json()
 			const updatedRemaning = await getData("/remaning")
-			console.log(updatedRemaning)
+			// console.log(updatedRemaning)
 		}
 		remaningForm.removeChild(loadingIndicator)
 	} catch (error) {

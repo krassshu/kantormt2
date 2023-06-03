@@ -60,13 +60,14 @@ const loginadmin = async (req, res) => {
 			admin: admin.admin,
 		},
 		process.env.JWT_PRIVATE_KEY,
-		{ expiresIn: "7d" } // token will expire in 7 days
+		{ expiresIn: "7d" }
 	)
-	res.cookie("token", token, {
+	res.cookie("admtoken", token, {
 		httpOnly: true,
 		maxAge: 7 * 24 * 60 * 60 * 1000,
-	}) // set cookie to expire in 7 days
-	res.json({ redirectUrl: "/admin-panel.html" })
+	})
+
+	res.json({ username: admin.username, redirectUrl: "/admin-panel.html" })
 }
 
 const registration = async (req, res) => {
