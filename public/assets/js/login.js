@@ -111,9 +111,9 @@ loginForm.addEventListener("submit", async (event) => {
 			inputs.forEach((input, index) => {
 				showError(input, errorInfo[index], errorData.error)
 			})
-		} else {
+		} 
 			const result = await response.json()
-		}
+		
 
 		const item = {
 			username: result.username,
