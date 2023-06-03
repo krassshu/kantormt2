@@ -56,6 +56,31 @@ const newRates = async (req, res) => {
 		})
 	}
 }
+const exchangeStatus = async (req, res) => {
+	try {
+		const { status, id } = req.body
+		const update = await Exchange.findOneAndUpdate(
+			{ _id: id },
+			{
+				resolved: status,
+			},
+			{
+				new: true,
+			}
+		)
+
+		if (!update) {
+			res.status(404).json({ message: "Nie można zmienić statusu." })
+			return
+		}
+		res.json({ message: "Zmieniono status", data: update })
+	} catch (err) {
+		res.status(500).json({
+			message: "Wystąpił błąd podczas aktualizacji statusu",
+			error: err.message,
+		})
+	}
+}
 
 const newRemaning = async (req, res) => {
 	try {
@@ -135,6 +160,7 @@ module.exports = {
 	newArticle,
 	newRates,
 	newRemaning,
+	exchangeStatus,
 	getRates,
 	getRemaning,
 	getExchange,

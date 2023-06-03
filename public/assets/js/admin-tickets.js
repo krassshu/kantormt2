@@ -1,4 +1,27 @@
-async function getAndDisplayTickets(filterStatus) {
+async function changeTicketStatus(id, status, currentFilterStatus) {
+	try {
+		const response = await fetch("/exchange", {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ id, status }),
+		})
+
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`)
+		}
+
+		const data = await response.json()
+		console.log(data.message)
+
+		displayTickets(currentFilterStatus)
+	} catch (error) {
+		console.error(
+			`Error occurred while updating ticket status: ${error.message}`
+		)
+	}
+}
+
+async function displayTickets(filterStatus) {
 	try {
 		const response = await fetch("/exchange", {
 			method: "GET",
@@ -12,7 +35,7 @@ async function getAndDisplayTickets(filterStatus) {
 		const data = await response.json()
 		const container = document.querySelector(".tickets__con")
 
-		container.innerHTML = "" // clear the container before appending new data
+		container.innerHTML = ""
 
 		for (const el of data) {
 			if (
@@ -30,7 +53,9 @@ async function getAndDisplayTickets(filterStatus) {
                     <p class="tickets__con-ticket-to">${el.serverTo}</p>
                     <p class="tickets__con-ticket-amount">${el.amountTo}</p>
                     <p class="tickets__con-ticket-date">${el.date}</p>
-                    <button type="submit" class="${buttonClass}">${ticketStatus}</button>
+                    <button type="submit" class="${buttonClass}" onclick="changeTicketStatus('${
+					el._id
+				}', '${!el.resolved}', '${filterStatus}')">${ticketStatus}</button>
                 </div>`
 
 				container.insertAdjacentHTML("beforeend", html)
@@ -41,9 +66,9 @@ async function getAndDisplayTickets(filterStatus) {
 	}
 }
 
-window.addEventListener("load", () => getAndDisplayTickets("unresolved"))
+window.addEventListener("load", () => displayTickets("unresolved"))
 
 const select = document.getElementById("type")
 select.addEventListener("change", async (event) => {
-	getAndDisplayTickets(event.target.value)
+	displayTickets(event.target.value)
 })
