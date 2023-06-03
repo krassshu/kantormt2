@@ -124,6 +124,7 @@ h2 {
 	}
 	.tickets {
 		margin-top: 21px;
+		overflow-y: scroll;
 		.info {
 			display: flex;
 
@@ -153,51 +154,71 @@ h2 {
 				margin-right: 20px;
 			}
 		}
-		&__ticket {
-			display: flex;
-			align-items: center;
-			height: 40px;
-			padding-left: 21px;
+		&__con {
+			height: 100vh;
+			width: 100%;
 			margin-top: 21px;
-			background-color: $items;
-			border-radius: 8px;
-
-			&-id {
-				min-width: 250px;
-				margin-right: 20px;
+			overflow-y: scroll;
+			:nth-child(1) {
+				margin-top: 0;
 			}
-			&-metin {
-				min-width: 120px;
-				margin-right: 20px;
-			}
-			&-discord {
-				min-width: 120px;
-				margin-right: 20px;
-			}
-			&-from {
-				min-width: 90px;
-				margin-right: 20px;
-			}
-			&-amount {
-				min-width: 95px;
-				margin-right: 20px;
-			}
-			&-to {
-				min-width: 90px;
-				margin-right: 20px;
-			}
-			&-date {
-				margin-right: 20px;
-			}
-			&-resolved {
-				width: 100px;
-				padding: 8px;
-				background-color: #00b164;
-				border: none;
+			&-ticket {
+				display: flex;
+				align-items: center;
+				height: 40px;
+				padding-left: 21px;
+				margin-top: 21px;
+				background-color: $items;
 				border-radius: 8px;
-				transition: background-color 0.3s;
-				&:hover {
-					background-color: #007643;
+
+				&-id {
+					min-width: 250px;
+					margin-right: 20px;
+				}
+				&-metin {
+					min-width: 120px;
+					margin-right: 20px;
+				}
+				&-discord {
+					min-width: 120px;
+					margin-right: 20px;
+				}
+				&-from {
+					min-width: 90px;
+					margin-right: 20px;
+				}
+				&-amount {
+					min-width: 95px;
+					margin-right: 20px;
+				}
+				&-to {
+					min-width: 90px;
+					margin-right: 20px;
+				}
+				&-date {
+					margin-right: 20px;
+				}
+				&-resolved {
+					width: 100px;
+					padding: 8px;
+					background-color: #00b164;
+					border: none;
+					border-radius: 8px;
+					transition: background-color 0.3s;
+					&:hover {
+						background-color: #007643;
+					}
+				}
+				&-unresolved {
+					width: 100px;
+					padding: 8px;
+					background-color: #982100;
+					border: none;
+					border-radius: 8px;
+					transition: background-color 0.3s;
+					&:hover {
+						background-color: #671600;
+					}
 				}
 			}
 		}

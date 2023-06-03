@@ -1,4 +1,4 @@
-const { Post, Currency, Admin } = require("../models")
+const { Post, Currency, Admin, Exchange } = require("../models")
 
 const newArticle = async (req, res) => {
 	try {
@@ -52,6 +52,31 @@ const newRates = async (req, res) => {
 	} catch (err) {
 		res.status(500).json({
 			message: "Wystąpił błąd podczas aktualizacji kursów",
+			error: err.message,
+		})
+	}
+}
+const exchangeStatus = async (req, res) => {
+	try {
+		const { status, id } = req.body
+		const update = await Exchange.findOneAndUpdate(
+			{ _id: id },
+			{
+				resolved: status,
+			},
+			{
+				new: true,
+			}
+		)
+
+		if (!update) {
+			res.status(404).json({ message: "Nie można zmienić statusu." })
+			return
+		}
+		res.json({ message: "Zmieniono status", data: update })
+	} catch (err) {
+		res.status(500).json({
+			message: "Wystąpił błąd podczas aktualizacji statusu",
 			error: err.message,
 		})
 	}
@@ -113,7 +138,30 @@ const getRemaning = async (req, res) => {
 		res.json(remaning.remaning)
 	} catch (error) {
 		console.log(error)
-		res.status(500).send("Wystąpił błąd podczas pobierania pozostałości")
+		res.status(500).send("Wystąpił błąd podczas pobierania danych")
 	}
 }
-module.exports = { newArticle, newRates, newRemaning, getRates, getRemaning }
+
+const getExchange = async (req, res) => {
+	try {
+		const exchange = await Exchange.find()
+		if (!exchange) {
+			res.status(404).json({ message: "Pozostałe wony nie zostały znalezione" })
+			return
+		}
+		res.json(exchange)
+	} catch (error) {
+		console.log(error)
+		res.status(500).send("Wystąpił błąd podczas pobierania ticketów")
+	}
+}
+
+module.exports = {
+	newArticle,
+	newRates,
+	newRemaning,
+	exchangeStatus,
+	getRates,
+	getRemaning,
+	getExchange,
+}

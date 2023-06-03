@@ -41,9 +41,8 @@ opinionForm.addEventListener("submit", async (event) => {
 			content.style.border = "1px solid #d70000"
 			errorInfo.classList.add("error-field")
 			errorInfo.textContent = error
-		} else {
-			const result = await response.json()
 		}
+		const result = await response.json()
 	} catch (err) {
 		console.log("Error:", err)
 	}

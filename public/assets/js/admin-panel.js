@@ -175,10 +175,41 @@ remaningForm.addEventListener("submit", async (event) => {
 })
 
 window.addEventListener("load", (event) => {
-	Promise.all([getData("/rates"), getData("/remaning")])
-		.then(([ratesData, remaningData]) => {
-			console.log("Rates data:", ratesData)
-			console.log("Remaining data:", remaningData)
+	Promise.all([getData("/rates"), getData("/remaning"), getData("/exchange")])
+		.then(([ratesData, remaningData, exchangeData]) => {
+			const remaning = document.querySelector(".remaning")
+			const unresolvedTicket = exchangeData.filter(
+				(obj) => obj.resolved === false
+			)
+			if (unresolvedTicket.length === 0) {
+				remaning.textContent = "0"
+			} else {
+				remaning.textContent = unresolvedTicket.length
+
+				const lastTicket = Object.values(exchangeData).pop()
+				const container = document.querySelector(".tickets__ticket-con")
+				let html = `
+<p class="tickets__ticket-con--item metin-nick">
+  Ticket ID:
+  <span style="font-weight: 700">${lastTicket._id}</span>
+</p>
+<p class="tickets__ticket-con--item metin-nick">
+  Metin's nick: <span style="font-weight: 700">${lastTicket.serverNick}</span>
+</p>
+<p class="tickets__ticket-con--item discord-nick">
+  Discord nick: <span style="font-weight: 700">${lastTicket.discordNick}</span>
+</p>
+<p class="tickets__ticket-con--item from-server">
+  From: <span style="font-weight: 700">${lastTicket.serverFrom}</span> -
+  <span style="font-weight: 700">${lastTicket.amountFrom}</span> won
+</p>
+<p class="tickets__ticket-con--item to-server">
+  To: <span style="font-weight: 700">${lastTicket.serverTo}</span> -
+  <span style="font-weight: 700">${lastTicket.amountTo}</span> won
+</p>
+<p class="date">${lastTicket.date}r.</p>`
+				container.innerHTML = html
+			}
 		})
 		.catch((error) => {
 			console.error("Error:", error)
