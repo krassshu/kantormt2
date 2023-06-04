@@ -104,6 +104,7 @@ h2 {
 				margin-bottom: 12px;
 				border-bottom: 1px solid $font-color;
 				&--action {
+					display: flex;
 					width: 200px;
 					.btn {
 						padding: 8px;
@@ -111,14 +112,14 @@ h2 {
 						border-radius: 8px;
 						transition: background-color 0.3s;
 					}
-					#edit {
+					.edit {
 						width: 70px;
 						background-color: #ffd500;
 						&:hover {
 							background-color: #b59700;
 						}
 					}
-					#delete {
+					.delete {
 						width: 70px;
 						margin-left: 8px;
 						background-color: #982100;
@@ -126,7 +127,7 @@ h2 {
 							background-color: #671600;
 						}
 					}
-					#save {
+					.save {
 						display: none;
 						background-color: #00b164;
 					}
@@ -155,7 +156,7 @@ h2 {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 8px;
-	#confirm-delete {
+	.confirm-delete {
 		height: 30px;
 		background-color: #982100;
 		padding: 8px;
@@ -177,4 +178,14 @@ h2 {
 }
 .show {
 	display: flex;
+}
+.show-btn {
+	display: block !important;
+}
+.hide {
+	display: none;
+}
+.textarea-on {
+	background-color: $input !important;
+	border: 1px solid $border !important;
 }
