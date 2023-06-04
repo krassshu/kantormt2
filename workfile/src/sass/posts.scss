@@ -92,6 +92,7 @@ h2 {
 		padding-right: 16px;
 		margin-top: 12px;
 		&__post {
+			position: relative;
 			padding: 12px;
 			background-color: $items;
 			border-radius: 8px;
@@ -102,30 +103,67 @@ h2 {
 				padding-bottom: 6px;
 				margin-bottom: 12px;
 				border-bottom: 1px solid $font-color;
-				#edit {
-					width: 70px;
-					padding: 8px;
-					background-color: #ffd500;
-					border: none;
-					border-radius: 8px;
-					transition: background-color 0.3s;
-					&:hover {
-						background-color: #b59700;
+				&--action {
+					width: 200px;
+					.btn {
+						padding: 8px;
+						border: none;
+						border-radius: 8px;
+						transition: background-color 0.3s;
 					}
-				}
-				#delete {
-					width: 70px;
-					padding: 8px;
-					margin-left: 8px;
-					background-color: #982100;
-					border: none;
-					border-radius: 8px;
-					transition: background-color 0.3s;
-					&:hover {
-						background-color: #671600;
+					#edit {
+						width: 70px;
+						background-color: #ffd500;
+						&:hover {
+							background-color: #b59700;
+						}
+					}
+					#delete {
+						width: 70px;
+						margin-left: 8px;
+						background-color: #982100;
+						&:hover {
+							background-color: #671600;
+						}
 					}
 				}
 			}
 		}
 	}
+}
+
+.post-confirmation {
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	border-radius: 8px;
+	#confirm-delete {
+		height: 30px;
+		background-color: #982100;
+		padding: 8px;
+		border: none;
+		border-radius: 8px;
+		transition: background-color 0.3s;
+		&:hover {
+			background-color: #671600;
+		}
+	}
+	.cancel {
+		width: 70px;
+		height: 30px;
+		margin-left: 8px;
+		padding: 8px;
+		border: none;
+		border-radius: 8px;
+	}
+}
+.show {
+	display: flex;
 }
