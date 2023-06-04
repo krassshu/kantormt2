@@ -1,0 +1,131 @@
+@use "reset.scss";
+$bgc: #181823;
+$font-color: #eeeeee;
+$border: #36363d;
+$input: #ffffff4d;
+$items: #272733;
+
+body {
+	display: flex;
+	background-color: $bgc;
+	color: $font-color;
+	font-family: "Roboto", sans-serif;
+	span {
+		text-transform: none;
+	}
+	overflow: hidden;
+}
+input,
+textarea {
+	color: $font-color;
+}
+
+h2 {
+	padding: 8px;
+	font-size: 21px;
+	border-bottom: 1px solid $font-color;
+}
+.nav {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 100vh;
+	width: 200px;
+	font-size: 18px;
+	border-right: 1px solid $input;
+	&__con {
+		margin-top: 18px;
+		width: 100%;
+		&-info {
+			font-style: italic;
+			padding-bottom: 8px;
+			text-align: center;
+			font-size: 26px;
+			border-bottom: 1px solid $input;
+			a {
+				text-decoration: none;
+				color: $font-color;
+			}
+		}
+		&-items {
+			margin-top: 4px;
+			&--item {
+				margin-top: 8px;
+
+				cursor: pointer;
+				transition: background-color 0.3s;
+
+				&:hover {
+					background-color: $input;
+				}
+				a {
+					display: inline-block;
+					width: 100%;
+					padding: 8px;
+					text-decoration: none;
+					color: $font-color;
+				}
+			}
+		}
+	}
+	button {
+		width: 100px;
+		margin: 8px 0;
+		font-size: 12px;
+		padding: 8px;
+		border: none;
+		border-radius: 8px;
+		transition: background-color 0.3s;
+		&:hover {
+			background-color: #9f9f9f;
+		}
+	}
+}
+.main {
+	width: 100%;
+	padding: 21px;
+	.posts {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		padding-right: 16px;
+		margin-top: 12px;
+		&__post {
+			padding: 12px;
+			background-color: $items;
+			border-radius: 8px;
+			&-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding-bottom: 6px;
+				margin-bottom: 12px;
+				border-bottom: 1px solid $font-color;
+				#edit {
+					width: 70px;
+					padding: 8px;
+					background-color: #ffd500;
+					border: none;
+					border-radius: 8px;
+					transition: background-color 0.3s;
+					&:hover {
+						background-color: #b59700;
+					}
+				}
+				#delete {
+					width: 70px;
+					padding: 8px;
+					margin-left: 8px;
+					background-color: #982100;
+					border: none;
+					border-radius: 8px;
+					transition: background-color 0.3s;
+					&:hover {
+						background-color: #671600;
+					}
+				}
+			}
+		}
+	}
+}
