@@ -1,29 +1,6 @@
 const { Post, Currency, Exchange } = require("../models")
 
-const newArticle = async (req, res) => {
-	try {
-		const { content } = req.body
-		const username = req.user.username
-		const currentDate = new Date()
-		let month = currentDate.getMonth() + 1
-		let day = currentDate.getDate()
-		if (day < 10) {
-			day = `0${day}`
-		}
-		if (month < 10) {
-			month = `0${month}`
-		}
-		const date = `${day}.${month}.${currentDate.getFullYear()}r.`
 
-		const article = new Post({ content, username, date })
-		console.log(article)
-		await article.save()
-		res.send(article)
-	} catch (error) {
-		console.log(error)
-		res.status(500).send("Wystąpił błąd podczas dodawania artykułu")
-	}
-}
 
 const newRates = async (req, res) => {
 	try {
@@ -158,7 +135,6 @@ const getExchange = async (req, res) => {
 }
 
 module.exports = {
-	newArticle,
 	newRates,
 	newRemaning,
 	exchangeStatus,

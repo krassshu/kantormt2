@@ -1,9 +1,24 @@
 const express = require("express")
 const router = express.Router()
-const { decodeToken, auth } = require("../middleware/authMiddleware")
+const { decodeToken } = require("../middleware/authMiddleware")
+
+const { loginadmin } = require("../controllers/adminAuthController")
+
+router.post("/loginadmin", loginadmin)
 
 const {
-	newArticle,
+	getPost,
+	newPost,
+	deletePost,
+	updatePost,
+} = require("../controllers/postController")
+
+router.get("/article", getPost)
+router.post("/article", decodeToken, newPost)
+router.delete("/article", deletePost)
+router.patch("/article", updatePost)
+
+const {
 	newRates,
 	newRemaning,
 	getRates,
@@ -12,7 +27,6 @@ const {
 	exchangeStatus,
 } = require("../controllers/adminController")
 
-router.post("/article", decodeToken, newArticle)
 router.patch("/rates", newRates)
 router.patch("/remaning", newRemaning)
 router.patch("/exchange", exchangeStatus)

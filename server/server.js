@@ -22,10 +22,10 @@ app.use(decodeToken)
 // Import and use the routes
 app.use("/", authRoutes)
 app.use("/", adminRoutes)
-app.use("/", postRoutes)
+
 // app.use("/support", supportRoutes)
-app.use("/exchange", exchangeRoutes)
-app.use("/opinion", opinionRoutes)
+app.use("/", exchangeRoutes)
+app.use("/", opinionRoutes)
 
 app.use((req, res, next) => {
 	if (req.path.indexOf(".") === -1) {

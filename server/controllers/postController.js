@@ -14,6 +14,32 @@ const getPost = async (req, res) => {
 		})
 	}
 }
+
+const newPost = async (req, res) => {
+	try {
+		const { content } = req.body
+		const username = req.user.username
+		const currentDate = new Date()
+		let month = currentDate.getMonth() + 1
+		let day = currentDate.getDate()
+		if (day < 10) {
+			day = `0${day}`
+		}
+		if (month < 10) {
+			month = `0${month}`
+		}
+		const date = `${day}.${month}.${currentDate.getFullYear()}r.`
+
+		const article = new Post({ content, username, date })
+		console.log(article)
+		await article.save()
+		res.send(article)
+	} catch (error) {
+		console.log(error)
+		res.status(500).send("Wystąpił błąd podczas dodawania artykułu")
+	}
+}
+
 const deletePost = async (req, res) => {
 	const { id } = req.body
 
@@ -55,4 +81,4 @@ const updatePost = async (req, res) => {
 	}
 }
 
-module.exports = { getPost, deletePost, updatePost }
+module.exports = { getPost, newPost, deletePost, updatePost }
