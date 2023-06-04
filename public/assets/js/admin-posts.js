@@ -6,19 +6,25 @@ if (storedUser) {
 	adminNick.textContent = nick.username
 }
 
+// Fetch utilities
+const fetchOptions = (method, body) => ({
+	method,
+	headers: { "Content-Type": "application/json" },
+	body: JSON.stringify(body),
+})
+
+async function makeRequest(url, options) {
+	const response = await fetch(url, options)
+	if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`)
+	}
+	return await response.json()
+}
+
+// Post operations
 async function deletePost(id) {
 	try {
-		const response = await fetch("/article", {
-			method: "DELETE",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ id }),
-		})
-
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`)
-		}
-
-		const data = await response.json()
+		await makeRequest("/article", fetchOptions("DELETE", { id }))
 		displayPosts()
 	} catch (error) {
 		console.log(error)
@@ -27,16 +33,7 @@ async function deletePost(id) {
 
 async function editPost(id, content) {
 	try {
-		const response = await fetch("/article", {
-			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ id, content }),
-		})
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`)
-		}
-
-		const data = await response.json()
+		await makeRequest("/article", fetchOptions("PATCH", { id, content }))
 		displayPosts()
 	} catch (error) {
 		console.log(error)
@@ -89,36 +86,38 @@ async function displayPosts() {
 	}
 }
 
-const startDelete = (index) => {
-	const delBgc = document.querySelectorAll(".post-confirmation")
-	delBgc[index].style.display = "flex"
-}
-const abordDelete = (index) => {
-	const delBgc = document.querySelectorAll(".post-confirmation")
-	delBgc[index].style.display = ""
+
+function getElements(selector) {
+	return document.querySelectorAll(selector)
 }
 
-const startEdit = (index) => {
-	const textArea = document.querySelectorAll(".posts__post-content")
-	const saveBtn = document.querySelectorAll(".save")
-	const editBtn = document.querySelectorAll(".edit")
-	textArea[index].removeAttribute("disabled")
-	textArea[index].classList.add("textarea-on")
-	saveBtn[index].classList.add("show-btn")
-	editBtn[index].classList.add("hide")
+function toggleDisplay(index, selector) {
+	const elements = getElements(selector)
+	elements[index].style.display =
+		elements[index].style.display === "flex" ? "" : "flex"
 }
+
+function toggleEdit(index) {
+	const textAreas = getElements(".posts__post-content")
+	const saveBtns = getElements(".save")
+	const editBtns = getElements(".edit")
+
+	textAreas[index].toggleAttribute("disabled")
+	textAreas[index].classList.toggle("textarea-on")
+	saveBtns[index].classList.toggle("show-btn")
+	editBtns[index].classList.toggle("hide")
+}
+
+const startDelete = (index) => toggleDisplay(index, ".post-confirmation")
+const abordDelete = (index) => toggleDisplay(index, ".post-confirmation")
+const startEdit = (index) => toggleEdit(index)
+
 const updatePost = (index, id) => {
-	const textArea = document.querySelectorAll(".posts__post-content")
-	const saveBtn = document.querySelectorAll(".save")
-	const editBtn = document.querySelectorAll(".edit")
-	const content = textArea[index].value
+	const textAreas = getElements(".posts__post-content")
+	const content = textAreas[index].value
 
 	editPost(id, content)
-
-	textArea[index].setAttribute("disabled", "")
-	textArea[index].classList.remove("textarea-on")
-	saveBtn[index].classList.remove("show-btn")
-	editBtn[index].classList.remove("hide")
+	toggleEdit(index)
 }
 
 window.addEventListener("load", async () => await displayPosts())
