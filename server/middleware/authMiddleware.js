@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken")
 
 function auth(req, res, next) {
-	const token = req.cookies.token
-	if (!token) return res.status(401).send("Access denied. No token provided.")
+	const admtoken = req.cookies.admtoken
+	if (!admtoken) return res.status(401).send("Access denied. No token provided.")
 
 	try {
-		const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
+		const decoded = jwt.verify(admtoken, process.env.JWT_PRIVATE_KEY)
 		req.user = decoded
 		if (req.user.admin) {
 			next()
@@ -18,11 +18,11 @@ function auth(req, res, next) {
 }
 
 function decodeToken(req, res, next) {
-	const token = req.cookies.token
-	if (!token) return next()
+	const admtoken = req.cookies.admtoken
+	if (!admtoken) return next()
 
 	try {
-		const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
+		const decoded = jwt.verify(admtoken, process.env.JWT_PRIVATE_KEY)
 		req.user = decoded
 		next()
 	} catch (ex) {

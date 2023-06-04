@@ -1,9 +1,9 @@
-const { Post, Currency, Admin, Exchange } = require("../models")
+const { Post, Currency, Exchange } = require("../models")
 
 const newArticle = async (req, res) => {
 	try {
 		const { content } = req.body
-		const admin = req.user.username
+		const username = req.user.username
 		const currentDate = new Date()
 		let month = currentDate.getMonth() + 1
 		let day = currentDate.getDate()
@@ -15,7 +15,8 @@ const newArticle = async (req, res) => {
 		}
 		const date = `${day}.${month}.${currentDate.getFullYear()}r.`
 
-		const article = new Post({ content, admin, date })
+		const article = new Post({ content, username, date })
+		console.log(article)
 		await article.save()
 		res.send(article)
 	} catch (error) {

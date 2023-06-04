@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { decodeToken } = require("../middleware/authMiddleware")
+const { decodeToken, auth } = require("../middleware/authMiddleware")
 
 const {
 	newArticle,

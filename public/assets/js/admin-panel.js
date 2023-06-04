@@ -51,6 +51,7 @@ async function getData(endpoint) {
 postForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
 
+	const nick = JSON.parse(storedUser)
 	const formData = new FormData(postForm)
 	const content = formData.get("post-content")
 	const contentValue = document.getElementById("post-content")
@@ -67,7 +68,6 @@ postForm.addEventListener("submit", async (event) => {
 	loadingIndicator.classList.add("loading")
 	loadingIndicator.textContent = "Przetwarzanie..."
 	postForm.appendChild(loadingIndicator)
-
 	try {
 		const response = await fetch("/article", {
 			method: "POST",
@@ -79,9 +79,9 @@ postForm.addEventListener("submit", async (event) => {
 		if (!response.ok) {
 			const error = await response.text()
 			console.log("Wystąpił błąd podczas dodawania artykułu", error)
-		} else {
-			const result = await response.json()
 		}
+		const result = await response.json()
+		console.log(result)
 	} catch (error) {
 		console.log("Error", error)
 	}

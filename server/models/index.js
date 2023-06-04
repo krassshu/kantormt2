@@ -33,7 +33,7 @@ const adminSchema = new mongoose.Schema({
 })
 
 const postSchema = new mongoose.Schema({
-	username: { type: String },
+	username: { type: String, require: true },
 	content: { type: String, required: true },
 	date: { type: String },
 })
