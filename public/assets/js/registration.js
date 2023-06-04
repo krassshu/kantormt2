@@ -73,11 +73,7 @@ registrationForm.addEventListener("submit", async (event) => {
 		return
 	}
 
-	if (
-		!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}$/.test(
-			password
-		)
-	) {
+	if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password)) {
 		showError(
 			inputs[3],
 			errorInfo[3],

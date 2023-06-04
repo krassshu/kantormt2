@@ -50,8 +50,7 @@ async function getData(endpoint) {
 
 postForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
-
-	const nick = JSON.parse(storedUser)
+	const textArea = document.getElementById("post-content")
 	const formData = new FormData(postForm)
 	const content = formData.get("post-content")
 	const contentValue = document.getElementById("post-content")
@@ -79,9 +78,11 @@ postForm.addEventListener("submit", async (event) => {
 		if (!response.ok) {
 			const error = await response.text()
 			console.log("Wystąpił błąd podczas dodawania artykułu", error)
+			return
 		}
 		const result = await response.json()
 		console.log(result)
+		textArea.value = ""
 	} catch (error) {
 		console.log("Error", error)
 	}
@@ -89,7 +90,7 @@ postForm.addEventListener("submit", async (event) => {
 
 ratesForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
-
+	const input = document.querySelectorAll(".exchange__form-con input")
 	const formData = new FormData(ratesForm)
 	const ratesData = {
 		glevia: formData.get("glevia"),
@@ -128,6 +129,9 @@ ratesForm.addEventListener("submit", async (event) => {
 			const updatedRemaning = await getData("/rates")
 			// console.log(updatedRemaning)
 		}
+		input.forEach((el) => {
+			el.value = ""
+		})
 		ratesForm.removeChild(loadingIndicator)
 	} catch (error) {
 		console.log("Error", error)
@@ -136,7 +140,7 @@ ratesForm.addEventListener("submit", async (event) => {
 
 remaningForm.addEventListener("submit", async (event) => {
 	event.preventDefault()
-
+	const input = document.querySelectorAll(".currency__form-con input")
 	const formData = new FormData(remaningForm)
 	const remaningData = {
 		glevia: formData.get("glevia"),
@@ -175,6 +179,9 @@ remaningForm.addEventListener("submit", async (event) => {
 			const updatedRemaning = await getData("/remaning")
 			// console.log(updatedRemaning)
 		}
+		input.forEach((el) => {
+			el.value = ""
+		})
 		remaningForm.removeChild(loadingIndicator)
 	} catch (error) {
 		console.log("Error", error)
